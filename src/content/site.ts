@@ -147,60 +147,56 @@ export const solution = {
   ],
 }
 
-export const metrics = {
-  title: "Resultados que nos gustaría enseñarte con cifras reales",
-  subtitle:
-    "Estamos construyendo nuestro histórico de proyectos. Estos contadores son un PLACEHOLDER hasta que tengamos datos propios que mostrar.",
-  items: [
-    { value: 0, suffix: "+", label: "Proyectos entregados", placeholder: true },
-    { value: 0, suffix: "%", label: "Tiempo ahorrado en tareas automatizadas", placeholder: true },
-    { value: 0, suffix: "", label: "Horas de soporte post-lanzamiento", placeholder: true },
-    { value: 0, suffix: "%", label: "Clientes que repiten", placeholder: true },
-  ],
-}
-
 export const capabilities = {
+  eyebrow: "Servicios",
   title: "Qué puedes construir con nosotros",
   subtitle: "Desde una landing sencilla hasta un ecosistema de automatizaciones e IA.",
   items: [
     {
       icon: "LayoutTemplate",
+      visual: "landing",
       title: "Landing pages",
       description: "Páginas de aterrizaje enfocadas en una sola acción: convertir visitas en clientes.",
       size: "md",
     },
     {
       icon: "Newspaper",
+      visual: "blog",
       title: "Webs con blog",
       description: "Sitios corporativos con sección de contenido para captar tráfico orgánico.",
       size: "md",
     },
     {
       icon: "ShoppingCart",
+      visual: "ecommerce",
       title: "Ecommerce",
       description: "Tiendas online con catálogo, pagos y gestión de pedidos listas para vender.",
-      size: "lg",
+      size: "md",
     },
     {
       icon: "Workflow",
+      visual: "automation",
       title: "Automatizaciones",
       description: "Flujos en Python que eliminan tareas manuales y conectan tus sistemas.",
       size: "md",
     },
     {
       icon: "Bot",
+      visual: "agent",
       title: "Agentes de IA",
       description: "Asistentes entrenados con tu información para atender, filtrar y resolver.",
-      size: "md",
+      size: "lg",
     },
     {
       icon: "Plug",
+      visual: "integrations",
       title: "Integraciones",
       description: "Conectamos APIs, CRM, WhatsApp y pasarelas de pago entre sí.",
       size: "lg",
     },
     {
       icon: "Wrench",
+      visual: "maintenance",
       title: "Mantenimiento",
       description: "Actualizaciones, mejoras y soporte continuo una vez tu web está en producción.",
       size: "md",
