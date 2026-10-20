@@ -1,11 +1,14 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+import dynamic from "next/dynamic"
 import { Reveal } from "@/components/motion/reveal"
 import { faq } from "@/content/site"
+
+// La sección va al final de la página: se divide en su propio chunk en vez
+// de ir en el bundle inicial, pero se sigue renderizando en el servidor
+// (ssr: true) para que el contenido siga siendo indexable.
+const FaqAccordion = dynamic(
+  () => import("@/components/sections/faq-accordion").then((mod) => mod.FaqAccordion),
+  { ssr: true }
+)
 
 export function Faq() {
   return (
@@ -20,18 +23,7 @@ export function Faq() {
       </Reveal>
 
       <Reveal delay={0.1}>
-        <Accordion className="mt-10">
-          {faq.items.map((item) => (
-            <AccordionItem key={item.question} value={item.question}>
-              <AccordionTrigger className="text-base">
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent>
-                <p className="text-muted-foreground">{item.answer}</p>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <FaqAccordion />
       </Reveal>
     </section>
   )

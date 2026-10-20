@@ -14,8 +14,8 @@ export default function Home() {
       <Problem />
       <Solution />
       <Capabilities />
-      <Audience />
       <Process />
+      <Audience />
       <Faq />
       <FinalCta />
     </>
