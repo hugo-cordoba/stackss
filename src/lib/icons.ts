@@ -1,0 +1,52 @@
+import {
+  Accessibility,
+  Bot,
+  Briefcase,
+  Building2,
+  Code2,
+  Gauge,
+  KeyRound,
+  LayoutTemplate,
+  ListChecks,
+  MousePointerClick,
+  Newspaper,
+  PenTool,
+  Plug,
+  Rocket,
+  Search,
+  ShoppingBag,
+  ShoppingCart,
+  Store,
+  Unplug,
+  Workflow,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react"
+
+export const iconMap: Record<string, LucideIcon> = {
+  Accessibility,
+  Bot,
+  Briefcase,
+  Building2,
+  Code2,
+  Gauge,
+  KeyRound,
+  LayoutTemplate,
+  ListChecks,
+  MousePointerClick,
+  Newspaper,
+  PenTool,
+  Plug,
+  Rocket,
+  Search,
+  ShoppingBag,
+  ShoppingCart,
+  Store,
+  Unplug,
+  Workflow,
+  Wrench,
+}
+
+export function getIcon(name: string): LucideIcon {
+  return iconMap[name] ?? Rocket
+}
