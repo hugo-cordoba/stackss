@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, Bot, Sparkles } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { cn } from "cn"
+import { buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Reveal } from "@/components/motion/reveal"
 import { hero } from "@/content/site"
@@ -36,22 +37,22 @@ export function Hero() {
 
           <Reveal delay={0.24}>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button
-                render={<Link href={hero.primaryCta.href} />}
-                size="lg"
-                className="h-11 px-6 text-base"
+              <Link
+                href={hero.primaryCta.href}
+                className={cn(buttonVariants({ size: "lg" }), "h-11 px-6 text-base")}
               >
                 {hero.primaryCta.label}
                 <ArrowRight className="size-4" aria-hidden="true" />
-              </Button>
-              <Button
-                render={<Link href={hero.secondaryCta.href} />}
-                variant="outline"
-                size="lg"
-                className="h-11 px-6 text-base"
+              </Link>
+              <Link
+                href={hero.secondaryCta.href}
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "h-11 px-6 text-base"
+                )}
               >
                 {hero.secondaryCta.label}
-              </Button>
+              </Link>
             </div>
           </Reveal>
         </div>

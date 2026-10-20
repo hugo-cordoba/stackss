@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { cn } from "cn"
+import { buttonVariants } from "@/components/ui/button"
 import { Reveal } from "@/components/motion/reveal"
 import { finalCta } from "@/content/site"
 
@@ -20,23 +21,25 @@ export function FinalCta() {
             {finalCta.subtitle}
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button
-              render={<Link href={finalCta.primaryCta.href} />}
-              size="lg"
-              variant="secondary"
-              className="h-11 px-6 text-base"
+            <Link
+              href={finalCta.primaryCta.href}
+              className={cn(
+                buttonVariants({ size: "lg", variant: "secondary" }),
+                "h-11 px-6 text-base"
+              )}
             >
               {finalCta.primaryCta.label}
               <ArrowRight className="size-4" aria-hidden="true" />
-            </Button>
-            <Button
-              render={<Link href={finalCta.secondaryCta.href} />}
-              size="lg"
-              variant="ghost"
-              className="h-11 px-6 text-base text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+            </Link>
+            <Link
+              href={finalCta.secondaryCta.href}
+              className={cn(
+                buttonVariants({ size: "lg", variant: "ghost" }),
+                "h-11 px-6 text-base text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+              )}
             >
               {finalCta.secondaryCta.label}
-            </Button>
+            </Link>
           </div>
         </div>
       </Reveal>

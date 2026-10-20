@@ -2,7 +2,8 @@
 
 import Link from "next/link"
 import { Menu } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { cn } from "cn"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import {
   NavigationMenu,
@@ -73,7 +74,9 @@ export function Navbar() {
 
         <div className="hidden items-center gap-2 md:flex">
           <ThemeToggle />
-          <Button render={<Link href={nav.cta.href} />}>{nav.cta.label}</Button>
+          <Link href={nav.cta.href} className={cn(buttonVariants())}>
+            {nav.cta.label}
+          </Link>
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
@@ -97,6 +100,7 @@ export function Navbar() {
               {nav.links.map((link) => (
                 <SheetClose
                   key={link.href}
+                  nativeButton={false}
                   render={<Link href={link.href} />}
                   className="rounded-lg px-3 py-2.5 text-left text-sm font-medium text-foreground hover:bg-muted"
                 >
@@ -109,6 +113,7 @@ export function Navbar() {
               {nav.company.items.map((item) => (
                 <SheetClose
                   key={item.href}
+                  nativeButton={false}
                   render={<Link href={item.href} />}
                   className="rounded-lg px-3 py-2.5 text-left text-sm font-medium text-foreground hover:bg-muted"
                 >
@@ -117,7 +122,11 @@ export function Navbar() {
               ))}
             </nav>
             <div className="mt-auto flex flex-col gap-2 p-4">
-              <SheetClose render={<Button render={<Link href={nav.cta.href} />} />}>
+              <SheetClose
+                nativeButton={false}
+                render={<Link href={nav.cta.href} />}
+                className={cn(buttonVariants())}
+              >
                 {nav.cta.label}
               </SheetClose>
             </div>
