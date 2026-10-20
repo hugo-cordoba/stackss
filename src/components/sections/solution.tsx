@@ -1,22 +1,33 @@
-import { Check } from "lucide-react"
+import type { ReactNode } from "react"
+import { Check, MousePointerClick } from "lucide-react"
+import { cn } from "cn"
 import { Reveal } from "@/components/motion/reveal"
+import {
+  INK,
+  MonoTag,
+  PulseDot,
+  dotGrid,
+  tint,
+} from "@/components/sections/mono"
 import { getIcon } from "@/lib/icons"
 import { solution } from "@/content/site"
-import { cn } from "cn"
 
 export function Solution() {
   return (
     <section id="solucion" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
       <Reveal>
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+          <MonoTag>{solution.eyebrow}</MonoTag>
+          <h2 className="mt-5 text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:text-5xl">
             {solution.title}
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">{solution.subtitle}</p>
+          <p className="mt-4 text-lg leading-snug text-foreground/85">
+            {solution.subtitle}
+          </p>
         </div>
       </Reveal>
 
-      <div className="mt-16 flex flex-col gap-20">
+      <div className="mt-16 flex flex-col gap-20 lg:gap-24">
         {solution.blocks.map((block, index) => {
           const Icon = getIcon(block.icon)
           const reversed = index % 2 === 1
@@ -24,26 +35,40 @@ export function Solution() {
             <div
               key={block.title}
               className={cn(
-                "grid items-center gap-10 lg:grid-cols-2",
+                "grid items-center gap-10 lg:grid-cols-2 lg:gap-16",
                 reversed && "lg:[&>*:first-child]:order-2"
               )}
             >
               <Reveal>
                 <div>
-                  <span className="flex size-10 items-center justify-center rounded-lg bg-brand/10 text-brand">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <p className="mt-4 text-sm font-semibold text-brand">
-                    {block.eyebrow}
-                  </p>
-                  <h3 className="mt-2 text-2xl font-semibold tracking-tight">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="flex size-10 items-center justify-center border border-brand/60"
+                      style={{ background: tint(14), color: INK }}
+                    >
+                      <Icon className="size-5" aria-hidden="true" />
+                    </span>
+                    <MonoTag tone="neutral">
+                      {String(index + 1).padStart(2, "0")} · {block.eyebrow}
+                    </MonoTag>
+                  </div>
+
+                  <h3 className="mt-6 text-2xl leading-tight font-semibold tracking-tight text-pretty sm:text-3xl">
                     {block.title}
                   </h3>
-                  <p className="mt-3 text-muted-foreground">{block.description}</p>
-                  <ul className="mt-5 flex flex-col gap-2.5">
+                  <p className="mt-3 max-w-lg text-muted-foreground">
+                    {block.description}
+                  </p>
+
+                  <ul className="mt-6 flex flex-col gap-3">
                     {block.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-2.5 text-sm">
-                        <Check className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden="true" />
+                      <li key={bullet} className="flex items-start gap-3 text-sm">
+                        <span
+                          className="mt-px flex size-5 shrink-0 items-center justify-center border border-brand/60"
+                          style={{ background: tint(14), color: INK }}
+                        >
+                          <Check className="size-3" strokeWidth={3} aria-hidden="true" />
+                        </span>
                         <span>{bullet}</span>
                       </li>
                     ))}
@@ -62,59 +87,124 @@ export function Solution() {
   )
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Mockups                                                                   */
+/* -------------------------------------------------------------------------- */
+
+function Stage({
+  label,
+  live,
+  children,
+}: {
+  label: string
+  live?: boolean
+  children: ReactNode
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className="relative border border-foreground/10 bg-muted/40 px-5 pt-14 pb-6 sm:px-8 sm:pb-8"
+      style={dotGrid}
+    >
+      <MonoTag className="absolute top-3.5 left-5 sm:left-8">
+        {live && <PulseDot />}
+        {label}
+      </MonoTag>
+      {children}
+    </div>
+  )
+}
+
+type StepState = "done" | "active" | "pending"
+
+function Step({ state, children }: { state: StepState; children: ReactNode }) {
+  return (
+    <div
+      className={cn(
+        "flex items-center gap-3 border bg-card px-3 py-2.5 text-sm font-medium",
+        state === "active" ? "border-brand/60" : "border-foreground/15",
+        state === "pending" ? "text-muted-foreground" : "text-foreground"
+      )}
+    >
+      <span className="flex size-4 shrink-0 items-center justify-center">
+        {state === "done" && (
+          <Check className="size-3.5" strokeWidth={3} style={{ color: INK }} />
+        )}
+        {state === "active" && (
+          <span className="size-3.5 animate-spin rounded-full border-2 border-brand/25 border-t-brand motion-reduce:animate-none" />
+        )}
+        {state === "pending" && (
+          <span className="size-2 rounded-full border border-foreground/30" />
+        )}
+      </span>
+      <span className="truncate">{children}</span>
+    </div>
+  )
+}
+
 function SolutionMockup({ type }: { type: string }) {
   if (type === "workflow") {
+    const steps: { label: string; state: StepState }[] = [
+      { label: "Nuevo pedido", state: "done" },
+      { label: "Procesar datos", state: "done" },
+      { label: "Actualizar CRM", state: "active" },
+      { label: "Notificar al equipo", state: "pending" },
+    ]
     return (
-      <div className="rounded-2xl bg-card p-6 shadow-xl ring-1 ring-foreground/10">
-        <div className="flex flex-col gap-3">
-          {["Nuevo pedido", "Procesar datos", "Actualizar CRM", "Notificar al equipo"].map(
-            (step, index) => (
-              <div key={step} className="flex items-center gap-3">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-brand/10 text-xs font-semibold text-brand">
-                  {index + 1}
-                </span>
-                <div className="h-9 flex-1 rounded-lg bg-muted px-3 py-2 text-sm font-medium">
-                  {step}
-                </div>
-              </div>
-            )
-          )}
+      <Stage label="Flujo activo" live>
+        <div className="flex flex-col gap-2">
+          {steps.map((step) => (
+            <Step key={step.label} state={step.state}>
+              {step.label}
+            </Step>
+          ))}
         </div>
-      </div>
+      </Stage>
     )
   }
 
   if (type === "chat") {
     return (
-      <div className="rounded-2xl bg-card p-6 shadow-xl ring-1 ring-foreground/10">
+      <Stage label="Agente IA" live>
         <div className="flex flex-col gap-2.5">
-          <div className="max-w-[80%] rounded-lg rounded-bl-sm bg-muted px-3 py-2 text-sm">
+          <div className="max-w-[80%] self-start border border-foreground/15 bg-card px-3 py-2 text-sm">
             ¿Cuánto tarda el envío a Barcelona?
           </div>
-          <div className="ml-auto max-w-[80%] rounded-lg rounded-br-sm bg-brand px-3 py-2 text-sm text-primary-foreground">
+          <div className="max-w-[80%] self-end bg-brand px-3 py-2 text-sm text-primary-foreground">
             Entre 24 y 48 horas laborables. ¿Quieres que te avise cuando salga de almacén?
           </div>
-          <div className="max-w-[80%] rounded-lg rounded-bl-sm bg-muted px-3 py-2 text-sm">
+          <div className="max-w-[80%] self-start border border-foreground/15 bg-card px-3 py-2 text-sm">
             Sí, por favor
           </div>
         </div>
-      </div>
+      </Stage>
     )
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-card shadow-xl ring-1 ring-foreground/10">
-      <div className="flex items-center gap-1.5 border-b border-border/60 bg-muted/50 px-4 py-2.5">
-        <span className="size-2 rounded-full bg-destructive/50" />
-        <span className="size-2 rounded-full bg-chart-5/40" />
-        <span className="size-2 rounded-full bg-brand/50" />
+    <Stage label="Convierte">
+      <div className="border border-foreground/15 bg-card">
+        <div className="flex items-center gap-1.5 border-b border-foreground/10 px-3 py-2">
+          <span className="size-1.5 rounded-full bg-foreground/20" />
+          <span className="size-1.5 rounded-full bg-foreground/20" />
+          <span className="size-1.5 rounded-full bg-foreground/20" />
+          <span className="ml-2 truncate border border-foreground/10 px-2 py-0.5 font-mono text-[0.6rem] text-muted-foreground">
+            tuempresa.com
+          </span>
+        </div>
+        <div className="flex flex-col gap-2 p-5">
+          <span className="h-3 w-4/5 bg-foreground/75" />
+          <span className="h-3 w-3/5 bg-foreground/75" />
+          <span className="mt-1 h-1.5 w-11/12 bg-foreground/15" />
+          <span className="h-1.5 w-3/4 bg-foreground/15" />
+          <div className="relative mt-3 w-fit">
+            <span className="flex h-8 items-center bg-brand px-4 font-mono text-[0.625rem] tracking-wider text-primary-foreground uppercase">
+              Reservar ahora
+            </span>
+            <MousePointerClick className="absolute -right-3 -bottom-4 size-5 fill-card text-foreground" />
+          </div>
+        </div>
       </div>
-      <div className="flex flex-col gap-3 p-6">
-        <div className="h-4 w-2/3 rounded-md bg-foreground/70" />
-        <div className="h-3 w-full rounded-full bg-muted" />
-        <div className="h-3 w-5/6 rounded-full bg-muted" />
-        <div className="mt-2 h-24 rounded-lg bg-brand/10" />
-      </div>
-    </div>
+    </Stage>
   )
 }

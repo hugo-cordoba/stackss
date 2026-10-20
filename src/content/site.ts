@@ -76,6 +76,7 @@ export const techMarquee = [
 ]
 
 export const problem = {
+  eyebrow: "El problema",
   title: "Lo que frena a la mayoría de negocios online",
   subtitle:
     "No es falta de esfuerzo: es que la web y los procesos no están diseñados para vender ni para escalar.",
@@ -102,6 +103,7 @@ export const problem = {
 }
 
 export const solution = {
+  eyebrow: "La solución",
   title: "Cómo lo resolvemos",
   subtitle: "Tres piezas que combinamos según lo que tu negocio necesite.",
   blocks: [
@@ -205,6 +207,7 @@ export const capabilities = {
 }
 
 export const audience = {
+  eyebrow: "Clientes",
   title: "Para quién trabajamos",
   subtitle: "Si tu negocio depende de internet para vender o atender clientes, probablemente podamos ayudarte.",
   items: [
@@ -237,6 +240,7 @@ export const audience = {
 }
 
 export const process = {
+  eyebrow: "Proceso",
   title: "Cómo trabajamos",
   subtitle: "Un proceso claro, de principio a fin, sin sorpresas por el camino.",
   steps: [
