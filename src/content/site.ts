@@ -46,7 +46,7 @@ export const nav = {
 
 export const hero = {
   badge: "Desarrollo web + automatización con IA",
-  title: "Webs que venden. Procesos que se automatizan solos.",
+  title: "Haz crecer tu negocio. Automatiza lo repetitivo.",
   subtitle:
     "Ayudamos a startups, pymes y agencias a lanzar sitios que convierten y a quitarse de encima el trabajo repetitivo con automatizaciones en Python y agentes de IA.",
   primaryCta: { label: "Hablemos de tu proyecto", href: "#contacto" },

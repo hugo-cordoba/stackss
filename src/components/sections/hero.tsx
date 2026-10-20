@@ -1,140 +1,440 @@
+import type { CSSProperties, ReactNode } from "react"
 import Link from "next/link"
-import { ArrowRight, Bot, Sparkles } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 import { cn } from "cn"
-import { buttonVariants } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Reveal } from "@/components/motion/reveal"
-import { hero } from "@/content/site"
+import { hero, techMarquee } from "@/content/site"
+
+/* -------------------------------------------------------------------------- */
+/*  Layout: rejilla de líneas discontinuas                                    */
+/* -------------------------------------------------------------------------- */
+
+const DASH = "border-dashed border-foreground/15"
+
+// Fila con borde inferior discontinuo que además se prolonga hasta el borde
+// izquierdo de la pantalla (el section tiene overflow-hidden para recortarla).
+function DashedRow({
+  children,
+  className,
+}: {
+  children?: ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      className={cn(
+        "relative border-b",
+        DASH,
+        "before:pointer-events-none before:absolute before:right-full before:-bottom-px before:h-px before:w-screen before:border-t before:border-dashed before:border-foreground/15",
+        className
+      )}
+    >
+      {children}
+    </div>
+  )
+}
+
+function HeroButton({
+  href,
+  variant,
+  children,
+}: {
+  href: string
+  variant: "primary" | "outline"
+  children: ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "group inline-flex h-12 items-center justify-center gap-3 px-5 font-mono text-sm tracking-wide whitespace-nowrap uppercase transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        variant === "primary"
+          ? "bg-foreground text-background hover:bg-foreground/85"
+          : "border border-foreground/15 bg-background text-foreground hover:bg-muted"
+      )}
+    >
+      {children}
+      <ChevronRight
+        className="size-4 transition-transform group-hover:translate-x-0.5"
+        aria-hidden="true"
+      />
+    </Link>
+  )
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Hero                                                                      */
+/* -------------------------------------------------------------------------- */
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[-10rem] -z-10 h-[40rem] bg-[radial-gradient(ellipse_at_top,var(--color-brand),transparent_60%)] opacity-[0.14]"
-      />
+      <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
+        <div className="grid lg:grid-cols-[1fr_1fr]">
+          {/* Columna de texto */}
+          <div className={cn("flex flex-col lg:border-r", DASH)}>
+            {/* Fila vacía: absorbe el espacio sobrante y marca la rejilla */}
+            <DashedRow className="min-h-12 flex-1 lg:min-h-20" />
 
-      <div className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:px-6 sm:pt-24 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <Reveal>
-            <Badge variant="secondary" className="h-7 gap-1.5 rounded-full px-3 text-xs">
-              <Sparkles className="size-3.5 text-brand" aria-hidden="true" />
-              {hero.badge}
-            </Badge>
-          </Reveal>
+            <DashedRow className="px-6 py-6 sm:px-10">
+              <Reveal>
+                <h1 className="text-[2.75rem] leading-[0.95] font-semibold tracking-[-0.045em] text-pretty sm:text-6xl lg:text-[4.5rem]">
+                  {hero.title}
+                </h1>
+              </Reveal>
+            </DashedRow>
 
-          <Reveal delay={0.08}>
-            <h1 className="mt-6 text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              {hero.title}
-            </h1>
-          </Reveal>
+            <DashedRow className="px-6 py-6 sm:px-10">
+              <Reveal delay={0.08}>
+                <p className="max-w-xl text-lg leading-snug text-foreground/85 sm:text-xl">
+                  {hero.subtitle}
+                </p>
+              </Reveal>
+            </DashedRow>
 
-          <Reveal delay={0.16}>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              {hero.subtitle}
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.24}>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                href={hero.primaryCta.href}
-                className={cn(buttonVariants({ size: "lg" }), "h-11 px-6 text-base")}
-              >
-                {hero.primaryCta.label}
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-              <Link
-                href={hero.secondaryCta.href}
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "h-11 px-6 text-base"
-                )}
-              >
-                {hero.secondaryCta.label}
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-
-        <Reveal delay={0.32} y={28}>
-          <div className="relative mx-auto mt-16 max-w-4xl">
-            <BrowserMockup />
-            <AgentFloatingCard />
+            <DashedRow className="px-6 py-4 sm:px-10 sm:py-0">
+              <Reveal delay={0.16}>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <HeroButton href={hero.primaryCta.href} variant="primary">
+                    {hero.primaryCta.label}
+                  </HeroButton>
+                  <HeroButton href={hero.secondaryCta.href} variant="outline">
+                    {hero.secondaryCta.label}
+                  </HeroButton>
+                </div>
+              </Reveal>
+            </DashedRow>
           </div>
-        </Reveal>
+
+          {/* Ilustración */}
+          <div
+            className={cn(
+              "flex items-center justify-center border-t p-6 lg:border-t-0 lg:p-8",
+              DASH
+            )}
+          >
+            <Reveal delay={0.2} className="w-full max-w-[600px]">
+              <StackIllustration />
+            </Reveal>
+          </div>
+        </div>
+      </div>
+
+      {/* Rejilla de tecnologías (a sangre) */}
+      <div className={cn("border-y", DASH)}>
+        <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
+          <p
+            className={cn(
+              "border-b px-6 py-3 text-center font-mono text-[0.7rem] tracking-widest text-muted-foreground uppercase",
+              DASH
+            )}
+          >
+            Algunas de las tecnologías con las que construimos
+          </p>
+          {/* -mr-px / -mb-px + overflow-hidden recortan el último borde de cada celda */}
+          <div className="overflow-hidden">
+            <ul className="-mr-px -mb-px grid grid-cols-2 md:grid-cols-5">
+              {techMarquee.map((name) => (
+                <li
+                  key={name}
+                  className={cn(
+                    "flex h-20 items-center justify-center border-r border-b px-3 text-center text-lg font-semibold tracking-tight text-foreground/80 sm:h-[88px]",
+                    DASH
+                  )}
+                >
+                  {name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   )
 }
 
-function BrowserMockup() {
-  return (
-    <div className="overflow-hidden rounded-2xl bg-card shadow-2xl ring-1 ring-foreground/10">
-      <div className="flex items-center gap-2 border-b border-border/60 bg-muted/50 px-4 py-3">
-        <div className="flex gap-1.5">
-          <span className="size-2.5 rounded-full bg-destructive/50" />
-          <span className="size-2.5 rounded-full bg-chart-5/40" />
-          <span className="size-2.5 rounded-full bg-brand/50" />
-        </div>
-        <div className="mx-auto flex max-w-xs flex-1 items-center justify-center rounded-md bg-background px-3 py-1 text-xs text-muted-foreground ring-1 ring-border/60">
-          {hero.mockup.browserTitle}
-        </div>
-      </div>
+/* -------------------------------------------------------------------------- */
+/*  Ilustración isométrica: la "pila" de Stackss                              */
+/* -------------------------------------------------------------------------- */
 
-      <div className="grid gap-4 bg-gradient-to-br from-muted/40 via-background to-background p-6 sm:grid-cols-[1.3fr_1fr] sm:p-10">
-        <div className="flex flex-col gap-3">
-          <div className="h-2.5 w-24 rounded-full bg-brand/70" />
-          <div className="h-5 w-4/5 rounded-md bg-foreground/80" />
-          <div className="h-5 w-3/5 rounded-md bg-foreground/40" />
-          <div className="mt-2 h-3 w-full rounded-full bg-muted" />
-          <div className="h-3 w-5/6 rounded-full bg-muted" />
-          <div className="mt-3 flex gap-2">
-            <div className="h-8 w-28 rounded-lg bg-brand" />
-            <div className="h-8 w-24 rounded-lg bg-muted" />
-          </div>
-        </div>
-        <div className="flex flex-col gap-3 rounded-xl bg-card p-4 ring-1 ring-foreground/10">
-          <div className="h-20 rounded-lg bg-brand/10" />
-          <div className="h-3 w-full rounded-full bg-muted" />
-          <div className="h-3 w-4/5 rounded-full bg-muted" />
-          <div className="h-3 w-3/5 rounded-full bg-muted" />
-        </div>
-      </div>
-    </div>
+const VB_W = 600
+const VB_H = 460
+const CX = 300 // centro horizontal de la pila
+const W = 130 // semiancho de cada losa
+const H = 65 // semialto de la cara superior (proporción isométrica 2:1)
+const T = 16 // grosor de la losa
+
+const INK = "color-mix(in oklch, var(--brand), var(--foreground) 55%)"
+const shade = (pct: number) =>
+  `color-mix(in oklch, var(--brand), black ${pct}%)`
+const tint = (pct: number, base = "var(--card)") =>
+  `color-mix(in oklch, var(--brand) ${pct}%, ${base})`
+
+type Pt = [number, number]
+
+const pts = (...p: Pt[]) => p.map(([x, y]) => `${x},${y}`).join(" ")
+const rhombus = (cx: number, cy: number, w: number, h: number) =>
+  pts([cx, cy - h], [cx + w, cy], [cx, cy + h], [cx - w, cy])
+
+// Punto sobre la cara superior de una losa: u baja hacia la derecha, v sube hacia la derecha.
+const face = (cy: number, u: number, v: number): Pt => [
+  CX - W + W * u + W * v,
+  cy + H * u - H * v,
+]
+
+function FaceLine({ cy, from, to }: { cy: number; from: Pt; to: Pt }) {
+  const [x1, y1] = face(cy, ...from)
+  const [x2, y2] = face(cy, ...to)
+  return <line x1={x1} y1={y1} x2={x2} y2={y2} />
+}
+
+function FacePoly({
+  cy,
+  points,
+  style,
+}: {
+  cy: number
+  points: Pt[]
+  style: CSSProperties
+}) {
+  return (
+    <polygon
+      points={pts(...points.map(([u, v]) => face(cy, u, v)))}
+      style={style}
+    />
   )
 }
 
-function AgentFloatingCard() {
+function Slab({
+  cy,
+  top,
+  left,
+  right,
+  children,
+}: {
+  cy: number
+  top: string
+  left: string
+  right: string
+  children?: ReactNode
+}) {
   return (
-    <div className="absolute -bottom-8 -right-4 w-64 rounded-xl bg-card p-4 shadow-2xl ring-1 ring-foreground/10 sm:-right-10 sm:w-72">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="flex size-8 items-center justify-center rounded-full bg-brand/10 text-brand">
-            <Bot className="size-4" aria-hidden="true" />
-          </span>
-          <span className="text-sm font-medium">{hero.mockup.agentCardTitle}</span>
-        </div>
-        <span className="flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
-          <span className="size-1.5 rounded-full bg-emerald-500" />
-          {hero.mockup.agentCardStatus}
-        </span>
-      </div>
+    <g strokeLinejoin="round" strokeWidth={1.25} style={{ stroke: INK }}>
+      <polygon
+        points={pts([CX - W, cy], [CX, cy + H], [CX, cy + H + T], [CX - W, cy + T])}
+        style={{ fill: left }}
+      />
+      <polygon
+        points={pts([CX, cy + H], [CX + W, cy], [CX + W, cy + T], [CX, cy + H + T])}
+        style={{ fill: right }}
+      />
+      <polygon points={rhombus(CX, cy, W, H)} style={{ fill: top }} />
+      {children}
+    </g>
+  )
+}
 
-      <div className="mt-3 flex flex-col gap-2">
-        {hero.mockup.agentMessages.map((message, index) => (
-          <div
-            key={index}
-            className={
-              message.from === "agente"
-                ? "ml-auto max-w-[85%] rounded-lg rounded-br-sm bg-brand px-3 py-2 text-xs text-primary-foreground"
-                : "max-w-[85%] rounded-lg rounded-bl-sm bg-muted px-3 py-2 text-xs text-foreground"
-            }
-          >
-            {message.text}
-          </div>
-        ))}
-      </div>
+function Cube({
+  cx,
+  cy,
+  s,
+  top,
+  left,
+  right,
+}: {
+  cx: number
+  cy: number
+  s: number
+  top: string
+  left: string
+  right: string
+}) {
+  const h = s / 2
+  return (
+    <g strokeLinejoin="round" strokeWidth={1.25} style={{ stroke: INK }}>
+      <polygon
+        points={pts([cx - s, cy], [cx, cy + h], [cx, cy + h + s], [cx - s, cy + s])}
+        style={{ fill: left }}
+      />
+      <polygon
+        points={pts([cx, cy + h], [cx + s, cy], [cx + s, cy + s], [cx, cy + h + s])}
+        style={{ fill: right }}
+      />
+      <polygon points={rhombus(cx, cy, s, h)} style={{ fill: top }} />
+    </g>
+  )
+}
+
+function Diamond({ x, y, s = 10 }: { x: number; y: number; s?: number }) {
+  return (
+    <g style={{ stroke: "none" }}>
+      <polygon points={rhombus(x, y + 5, s, s / 2)} style={{ fill: shade(10) }} />
+      <polygon points={rhombus(x, y, s, s / 2)} style={{ fill: tint(55) }} />
+    </g>
+  )
+}
+
+// Etiqueta HTML posicionada en coordenadas del viewBox. El tamaño de fuente
+// escala con el ancho del contenedor para que no se desborde en móvil.
+function Tag({
+  x,
+  y,
+  anchor = "start",
+  children,
+}: {
+  x: number
+  y: number
+  anchor?: "start" | "center" | "end"
+  children: ReactNode
+}) {
+  const shift = anchor === "start" ? "0%" : anchor === "end" ? "-100%" : "-50%"
+  return (
+    <span
+      className="absolute inline-flex items-center gap-[0.5em] border border-brand/60 px-[0.6em] py-[0.45em] font-mono leading-none tracking-wider whitespace-nowrap text-foreground uppercase [font-size:min(0.625rem,2.2cqw)]"
+      style={{
+        left: `${(x / VB_W) * 100}%`,
+        top: `${(y / VB_H) * 100}%`,
+        transform: `translate(${shift}, -50%)`,
+        background: tint(14),
+      }}
+    >
+      {children}
+    </span>
+  )
+}
+
+function StackIllustration() {
+  const web = 150
+  const flow = 238
+  const agent = 326
+  const nodeX = (u: number) => face(flow, u, 0.5)
+
+  return (
+    <div aria-hidden="true" className="@container relative aspect-[600/460] w-full">
+      <svg
+        viewBox={`0 0 ${VB_W} ${VB_H}`}
+        className="absolute inset-0 size-full"
+        fill="none"
+      >
+        {/* Eje vertical que atraviesa la pila */}
+        <line
+          x1={CX}
+          y1={46}
+          x2={CX}
+          y2={440}
+          strokeWidth={1}
+          strokeDasharray="3 4"
+          style={{ stroke: INK }}
+          strokeOpacity={0.6}
+        />
+
+        {/* Losa 3 · Agente de IA */}
+        <Slab
+          cy={agent}
+          top="var(--card)"
+          left={tint(10)}
+          right={tint(22)}
+        >
+          <FacePoly
+            cy={agent}
+            points={[[0.14, 0.58], [0.5, 0.58], [0.5, 0.82], [0.14, 0.82]]}
+            style={{ fill: "var(--card)" }}
+          />
+          <FacePoly
+            cy={agent}
+            points={[[0.46, 0.16], [0.86, 0.16], [0.86, 0.4], [0.46, 0.4]]}
+            style={{ fill: "var(--brand)" }}
+          />
+        </Slab>
+
+        {/* Losa 2 · Automatización */}
+        <Slab cy={flow} top={tint(22)} left={tint(34)} right={tint(48)}>
+          <g strokeWidth={1.5}>
+            <line
+              x1={nodeX(0.22)[0]}
+              y1={nodeX(0.22)[1]}
+              x2={nodeX(0.78)[0]}
+              y2={nodeX(0.78)[1]}
+            />
+          </g>
+          {[0.22, 0.5, 0.78].map((u) => {
+            const [x, y] = nodeX(u)
+            return (
+              <polygon
+                key={u}
+                points={rhombus(x, y, 15, 7.5)}
+                style={{ fill: u === 0.5 ? "var(--brand)" : "var(--card)" }}
+              />
+            )
+          })}
+        </Slab>
+
+        {/* Losa 1 · Web */}
+        <Slab cy={web} top="var(--brand)" left={shade(14)} right={shade(28)}>
+          <g strokeLinecap="round" strokeWidth={2.5} strokeOpacity={0.6}>
+            <FaceLine cy={web} from={[0.2, 0.74]} to={[0.8, 0.74]} />
+            <FaceLine cy={web} from={[0.2, 0.58]} to={[0.64, 0.58]} />
+            <FaceLine cy={web} from={[0.2, 0.44]} to={[0.72, 0.44]} />
+          </g>
+          <FacePoly
+            cy={web}
+            points={[[0.52, 0.12], [0.82, 0.12], [0.82, 0.3], [0.52, 0.3]]}
+            style={{ fill: INK, fillOpacity: 0.35, stroke: "none" }}
+          />
+        </Slab>
+
+        {/* Cubos flotantes */}
+        <Cube cx={86} cy={132} s={20} top="var(--brand)" left={shade(14)} right={shade(28)} />
+        <Cube cx={96} cy={346} s={34} top="var(--card)" left="var(--card)" right={tint(12)} />
+
+        {/* Líneas guía discontinuas */}
+        <g
+          strokeWidth={1}
+          strokeDasharray="3 3"
+          strokeOpacity={0.7}
+          style={{ stroke: INK }}
+        >
+          <line x1={CX + W} y1={web} x2={CX + W + 26} y2={web - 13} />
+          <line x1={CX - W} y1={flow} x2={CX - W - 26} y2={flow - 13} />
+          <line x1={CX + W} y1={agent} x2={CX + W + 26} y2={agent - 13} />
+          <line x1={130} y1={346} x2={CX - W} y2={agent} />
+        </g>
+        <g style={{ fill: INK }}>
+          <circle cx={CX + W} cy={web} r={2.5} />
+          <circle cx={CX - W} cy={flow} r={2.5} />
+          <circle cx={CX + W} cy={agent} r={2.5} />
+        </g>
+
+        {/* Rombos decorativos */}
+        <Diamond x={60} y={70} />
+        <Diamond x={515} y={86} />
+        <Diamond x={556} y={236} />
+        <Diamond x={36} y={290} />
+        <Diamond x={420} y={424} />
+      </svg>
+
+      <Tag x={CX} y={36} anchor="center">
+        Stackss
+      </Tag>
+      <Tag x={CX + W + 26} y={web - 13}>
+        Web
+      </Tag>
+      <Tag x={CX - W - 26} y={flow - 13} anchor="end">
+        Automatización
+      </Tag>
+      <Tag x={CX + W + 26} y={agent - 13}>
+        Agente IA
+      </Tag>
+      <Tag x={96} y={418} anchor="center">
+        Tus datos
+      </Tag>
+      <Tag x={462} y={384}>
+        <span
+          className="size-[0.6em] animate-pulse rounded-full bg-brand motion-reduce:animate-none"
+          aria-hidden="true"
+        />
+        Activo
+      </Tag>
     </div>
   )
 }
