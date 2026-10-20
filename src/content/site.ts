@@ -271,33 +271,6 @@ export const process = {
   ],
 }
 
-export const quality = {
-  title: "Calidad sin excusas",
-  subtitle: "No entregamos nada que nosotros mismos no usaríamos.",
-  items: [
-    {
-      icon: "Gauge",
-      title: "Rendimiento",
-      description: "Sitios rápidos de verdad, optimizados para que no pierdas visitas por una carga lenta.",
-    },
-    {
-      icon: "Search",
-      title: "SEO",
-      description: "Estructura y metadatos pensados para que te encuentren en buscadores desde el día uno.",
-    },
-    {
-      icon: "Accessibility",
-      title: "Accesibilidad",
-      description: "Contraste, semántica y navegación por teclado para que tu web la pueda usar cualquiera.",
-    },
-    {
-      icon: "KeyRound",
-      title: "Código tuyo",
-      description: "El código es propiedad del cliente. Sin dependencias ocultas ni candados técnicos.",
-    },
-  ],
-}
-
 export const faq = {
   title: "Preguntas frecuentes",
   subtitle: "Lo que más nos preguntan antes de empezar un proyecto.",

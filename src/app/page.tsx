@@ -4,7 +4,6 @@ import { Solution } from "@/components/sections/solution"
 import { Capabilities } from "@/components/sections/capabilities"
 import { Audience } from "@/components/sections/audience"
 import { Process } from "@/components/sections/process"
-import { Quality } from "@/components/sections/quality"
 import { Faq } from "@/components/sections/faq"
 import { FinalCta } from "@/components/sections/final-cta"
 
@@ -17,7 +16,6 @@ export default function Home() {
       <Capabilities />
       <Audience />
       <Process />
-      <Quality />
       <Faq />
       <FinalCta />
     </>
