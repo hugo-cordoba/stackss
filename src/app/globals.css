@@ -52,10 +52,10 @@
 }
 
 :root {
-  /* Marca Stackss: único punto para cambiar el azul primario */
-  --brand: oklch(0.546 0.215 262.1);
-  --brand-foreground: oklch(0.985 0 0);
-  --brand-muted: oklch(0.943 0.03 258);
+  /* Marca Stackss: único punto para cambiar el color primario */
+  --brand: oklch(0.81 0.22 150); /* #19E76E */
+  --brand-foreground: oklch(0.17 0.03 150);
+  --brand-muted: oklch(0.94 0.05 150);
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.17 0.014 266);
@@ -70,7 +70,7 @@
   --muted: oklch(0.967 0.003 264);
   --muted-foreground: oklch(0.5 0.02 264);
   --accent: var(--brand-muted);
-  --accent-foreground: oklch(0.33 0.1 262);
+  --accent-foreground: oklch(0.28 0.09 150);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.914 0.006 264);
   --input: oklch(0.914 0.006 264);
@@ -92,9 +92,9 @@
 }
 
 .dark {
-  --brand: oklch(0.685 0.17 260.2);
-  --brand-foreground: oklch(0.145 0.02 264);
-  --brand-muted: oklch(0.27 0.05 262);
+  --brand: oklch(0.81 0.22 150); /* #19E76E */
+  --brand-foreground: oklch(0.145 0.03 150);
+  --brand-muted: oklch(0.28 0.07 150);
 
   --background: oklch(0.145 0.012 264);
   --foreground: oklch(0.985 0 0);
@@ -109,7 +109,7 @@
   --muted: oklch(0.269 0.01 264);
   --muted-foreground: oklch(0.708 0.01 264);
   --accent: var(--brand-muted);
-  --accent-foreground: oklch(0.9 0.05 260);
+  --accent-foreground: oklch(0.88 0.08 150);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
@@ -139,6 +139,7 @@
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 }
 
