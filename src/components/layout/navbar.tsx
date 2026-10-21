@@ -24,11 +24,10 @@ const NavbarMobileMenu = dynamic(
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
-// Ancho máximo de la píldora. Al hacer scroll se ajusta al mismo ancho de
-// contenido que usan las secciones (max-w-6xl = 1152px): nunca queda más
-// estrecha que la cuadrícula real de la web.
+// Ancho máximo de la píldora. Al hacer scroll se estrecha hasta 1150px
+// (los 1152px de max-w-6xl menos 2px).
 const WIDTH_TOP = 1280
-const WIDTH_SCROLLED = 1152
+const WIDTH_SCROLLED = 1150
 
 export function Navbar() {
   const { scrollY } = useScroll()
@@ -73,7 +72,7 @@ export function Navbar() {
           )}
         >
           <Link
-            href="#"
+            href="/"
             className="flex items-center gap-2 rounded-lg text-lg font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <span

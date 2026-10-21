@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { ArrowRight, X } from "lucide-react"
 import { announcementBanner } from "@/content/site"
 
@@ -11,7 +12,7 @@ export function AnnouncementBanner() {
 
   return (
     <div className="relative flex items-center justify-center gap-2 bg-primary px-4 py-2.5 text-center text-sm font-medium text-primary-foreground">
-      <a
+      <Link
         href={announcementBanner.href}
         className="inline-flex items-center gap-1.5 hover:underline"
       >
@@ -20,7 +21,7 @@ export function AnnouncementBanner() {
           {announcementBanner.linkLabel}
           <ArrowRight className="size-3.5" aria-hidden="true" />
         </span>
-      </a>
+      </Link>
       <button
         type="button"
         onClick={() => setVisible(false)}

@@ -11,37 +11,37 @@ export const siteConfig = {
 export const announcementBanner = {
   message: "Nuevo: automatizaciones con agentes de IA para atención al cliente.",
   linkLabel: "Ver cómo funciona",
-  href: "#solucion",
+  href: "/#solucion",
 }
 
 export const nav = {
   logo: "Stackss",
   links: [
-    { label: "Servicios", href: "#capacidades" },
-    { label: "Proyectos", href: "#proyectos" },
-    { label: "Proceso", href: "#proceso" },
+    { label: "Servicios", href: "/#capacidades" },
+    { label: "Proyectos", href: "/#proyectos" },
+    { label: "Proceso", href: "/#proceso" },
   ],
   company: {
     label: "Empresa",
     items: [
       {
         label: "Sobre nosotros",
-        href: "#sobre-nosotros",
+        href: "/#sobre-nosotros",
         description: "Quiénes somos y cómo trabajamos.",
       },
       {
-        label: "Blog",
-        href: "#blog",
-        description: "Ideas sobre webs, automatización e IA.",
+        label: "FAQ",
+        href: "/faq",
+        description: "Respuestas a las dudas más habituales.",
       },
       {
         label: "Contacto",
-        href: "#contacto",
+        href: "/#contacto",
         description: "Cuéntanos tu proyecto.",
       },
     ],
   },
-  cta: { label: "Hablemos", href: "#contacto" },
+  cta: { label: "Hablemos", href: "/#contacto" },
 }
 
 export const hero = {
@@ -206,39 +206,6 @@ export const capabilities = {
   ],
 }
 
-export const audience = {
-  eyebrow: "Clientes",
-  title: "Para quién trabajamos",
-  subtitle: "Si tu negocio depende de internet para vender o atender clientes, probablemente podamos ayudarte.",
-  items: [
-    {
-      icon: "Rocket",
-      title: "Startups",
-      description: "Necesitas validar rápido con una web sólida sin quemar todo el runway.",
-    },
-    {
-      icon: "Store",
-      title: "Pymes y negocios locales",
-      description: "Quieres una presencia online que genere clientes de verdad, no solo que exista.",
-    },
-    {
-      icon: "ShoppingBag",
-      title: "Ecommerce",
-      description: "Buscas una tienda rápida, fiable y con procesos de pedido automatizados.",
-    },
-    {
-      icon: "Building2",
-      title: "Agencias",
-      description: "Necesitas un partner técnico para desarrollo o automatizaciones de tus clientes.",
-    },
-    {
-      icon: "Briefcase",
-      title: "Profesionales independientes",
-      description: "Quieres una web que transmita confianza y te ahorre gestión administrativa.",
-    },
-  ],
-}
-
 export const process = {
   eyebrow: "Proceso",
   title: "Cómo trabajamos",
@@ -313,11 +280,21 @@ export const faq = {
 }
 
 export const finalCta = {
+  eyebrow: "Contacto",
   title: "¿Hablamos de tu proyecto?",
   subtitle:
     "Cuéntanos qué necesitas y te decimos, sin rodeos, si podemos ayudarte y cómo.",
+  // TODO: sustituir "#contacto" por un mailto:, un formulario o un enlace a calendario.
   primaryCta: { label: "Escríbenos", href: "#contacto" },
-  secondaryCta: { label: "Ver proceso de trabajo", href: "#proceso" },
+  secondaryCta: { label: "Ver proceso de trabajo", href: "/#proceso" },
+  highlights: ["Presupuesto cerrado", "Código 100 % tuyo"],
+  mockup: {
+    tag: "Nuevo proyecto",
+    messages: [
+      { from: "cliente", text: "Quiero una web que venda y automatizar mis pedidos." },
+      { from: "stackss", text: "Cuéntanos más y te decimos si encaja y cómo lo plantearíamos." },
+    ],
+  },
 }
 
 export const footer = {
@@ -327,18 +304,17 @@ export const footer = {
     {
       title: "Principal",
       links: [
-        { label: "Servicios", href: "#capacidades" },
-        { label: "Proyectos", href: "#proyectos" },
-        { label: "Proceso", href: "#proceso" },
-        { label: "Contacto", href: "#contacto" },
+        { label: "Servicios", href: "/#capacidades" },
+        { label: "Proyectos", href: "/#proyectos" },
+        { label: "Proceso", href: "/#proceso" },
+        { label: "Contacto", href: "/#contacto" },
       ],
     },
     {
       title: "Útil",
       links: [
-        { label: "Sobre nosotros", href: "#sobre-nosotros" },
-        { label: "Blog", href: "#blog" },
-        { label: "FAQ", href: "#faq" },
+        { label: "Sobre nosotros", href: "/#sobre-nosotros" },
+        { label: "FAQ", href: "/faq" },
       ],
     },
     {
