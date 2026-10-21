@@ -19,7 +19,10 @@ export function Process() {
   const lastIndex = process.steps.length - 1
 
   return (
-    <section id="proceso" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+    <section
+      id="proceso"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
+    >
       <Reveal>
         <div className="max-w-2xl">
           <MonoTag>{process.eyebrow}</MonoTag>
@@ -32,16 +35,17 @@ export function Process() {
         </div>
       </Reveal>
 
-      <ol className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-start">
+      {/* 2x2 en móvil y tablet, 4 columnas escalonadas en escritorio */}
+      <ol className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-4 lg:grid-cols-4 lg:items-start">
         {process.steps.map((step, index) => {
           const Icon = getIcon(step.icon)
           const isLast = index === lastIndex
           return (
             <li key={step.number} className={cn("relative", OFFSETS[index])}>
-              <Reveal delay={index * 0.08}>
+              <Reveal delay={index * 0.08} className="h-full">
                 <article
                   className={cn(
-                    "flex flex-col border bg-card",
+                    "flex h-full flex-col border bg-card",
                     isLast ? "border-brand/60" : "border-foreground/10"
                   )}
                 >
@@ -49,7 +53,7 @@ export function Process() {
                   <div
                     aria-hidden="true"
                     className={cn(
-                      "relative flex h-32 items-end justify-between p-4",
+                      "relative flex h-24 items-end justify-between p-3 sm:h-32 sm:p-4",
                       !isLast && "bg-muted/40"
                     )}
                     style={{
@@ -59,29 +63,29 @@ export function Process() {
                   >
                     <MonoTag
                       tone={isLast ? "brand" : "neutral"}
-                      className="absolute top-3.5 left-4"
+                      className="absolute top-2.5 left-3 sm:top-3.5 sm:left-4"
                     >
                       {isLast && <PulseDot />}
                       Paso {step.number}
                     </MonoTag>
 
                     <span
-                      className="flex size-10 items-center justify-center border border-brand/60"
+                      className="flex size-8 items-center justify-center border border-brand/60 sm:size-10"
                       style={{ background: tint(14), color: INK }}
                     >
-                      <Icon className="size-5" />
+                      <Icon className="size-4 sm:size-5" />
                     </span>
 
-                    <span className="font-mono text-4xl leading-none font-semibold tracking-tight text-foreground/15">
+                    <span className="font-mono text-3xl leading-none font-semibold tracking-tight text-foreground/15 sm:text-4xl">
                       {step.number}
                     </span>
                   </div>
 
-                  <div className="p-5">
-                    <h3 className="text-base font-semibold tracking-tight">
+                  <div className="p-3.5 sm:p-5">
+                    <h3 className="text-sm font-semibold tracking-tight sm:text-base">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground sm:mt-2 sm:text-sm sm:leading-normal">
                       {step.description}
                     </p>
                   </div>

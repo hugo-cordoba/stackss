@@ -5,8 +5,8 @@ import { footer, nav } from "@/content/site"
 export function Footer() {
   return (
     <footer className="border-t border-border/60 bg-muted/30">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <span className="text-lg font-semibold tracking-tight">
               {nav.logo}
@@ -37,7 +37,7 @@ export function Footer() {
           ))}
         </div>
 
-        <Separator className="my-10" />
+        <Separator className="my-8 sm:my-10" />
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-xs text-muted-foreground">{footer.legalNote}</p>

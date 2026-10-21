@@ -9,8 +9,8 @@ export const siteConfig = {
 }
 
 export const announcementBanner = {
-  message: "Nuevo: automatizaciones con agentes de IA para atención al cliente.",
-  linkLabel: "Ver cómo funciona",
+  message: "Nuevo: agentes de IA.",
+  linkLabel: "Ver más",
   href: "/#solucion",
 }
 

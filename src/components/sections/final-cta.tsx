@@ -39,14 +39,14 @@ function CtaButton({
 
 export function FinalCta() {
   return (
-    <section id="contacto" className="py-20">
+    <section id="contacto" className="py-16 sm:py-20">
       <div className={cn("border-y", DASH)}>
         <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
           <div className="grid lg:grid-cols-2">
-            {/* Texto */}
+            {/* Texto: en móvil va debajo del dibujo (el borde superior lo separa) */}
             <div
               className={cn(
-                "flex flex-col justify-center px-6 py-12 sm:px-10 sm:py-16 lg:border-r",
+                "flex flex-col justify-center border-t px-6 py-10 sm:px-10 sm:py-16 lg:border-t-0 lg:border-r",
                 DASH
               )}
             >
@@ -84,14 +84,11 @@ export function FinalCta() {
               </Reveal>
             </div>
 
-            {/* Escenario decorativo */}
-            <Reveal delay={0.1} className="h-full">
+            {/* Escenario decorativo: primero en móvil, a la derecha en escritorio */}
+            <Reveal delay={0.1} className="order-first h-full lg:order-none">
               <div
                 aria-hidden="true"
-                className={cn(
-                  "relative flex h-full flex-col justify-center gap-2.5 border-t bg-muted/40 px-6 pt-16 pb-10 sm:px-10 sm:pb-14 lg:border-t-0",
-                  DASH
-                )}
+                className="relative flex h-full flex-col justify-center gap-2.5 bg-muted/40 px-6 pt-14 pb-8 sm:px-10 sm:pt-16 sm:pb-14"
                 style={dotGrid}
               >
                 <MonoTag className="absolute top-3.5 left-6 sm:left-10">

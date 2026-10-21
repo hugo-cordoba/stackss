@@ -14,7 +14,7 @@ import { solution } from "@/content/site"
 
 export function Solution() {
   return (
-    <section id="solucion" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+    <section id="solucion" className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
       <Reveal>
         <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
           <MonoTag>{solution.eyebrow}</MonoTag>
@@ -27,7 +27,7 @@ export function Solution() {
         </div>
       </Reveal>
 
-      <div className="mt-16 flex flex-col gap-20 lg:gap-24">
+      <div className="mt-10 flex flex-col gap-12 sm:mt-16 sm:gap-20 lg:gap-24">
         {solution.blocks.map((block, index) => {
           const Icon = getIcon(block.icon)
           const reversed = index % 2 === 1
@@ -35,7 +35,7 @@ export function Solution() {
             <div
               key={block.title}
               className={cn(
-                "grid items-center gap-10 lg:grid-cols-2 lg:gap-16",
+                "grid items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-16",
                 reversed && "lg:[&>*:first-child]:order-2"
               )}
             >
@@ -53,14 +53,14 @@ export function Solution() {
                     </MonoTag>
                   </div>
 
-                  <h3 className="mt-6 text-2xl leading-tight font-semibold tracking-tight text-pretty sm:text-3xl">
+                  <h3 className="mt-5 text-2xl leading-tight font-semibold tracking-tight text-pretty sm:mt-6 sm:text-3xl">
                     {block.title}
                   </h3>
                   <p className="mt-3 max-w-lg text-muted-foreground">
                     {block.description}
                   </p>
 
-                  <ul className="mt-6 flex flex-col gap-3">
+                  <ul className="mt-5 flex flex-col gap-3 sm:mt-6">
                     {block.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-3 text-sm">
                         <span

@@ -71,12 +71,17 @@ export function Hero() {
     <section className="relative overflow-hidden">
       <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
         <div className="grid lg:grid-cols-[1fr_1fr]">
-          {/* Columna de texto */}
-          <div className={cn("flex flex-col lg:border-r", DASH)}>
-            {/* Fila vacía: absorbe el espacio sobrante y marca la rejilla */}
-            <DashedRow className="min-h-12 flex-1 lg:min-h-20" />
+          {/* Columna de texto: centrada en móvil/tablet, a la izquierda en escritorio */}
+          <div
+            className={cn(
+              "flex flex-col text-center lg:border-r lg:text-left",
+              DASH
+            )}
+          >
+            {/* Fila vacía: solo escritorio (absorbe el espacio sobrante y marca la rejilla) */}
+            <DashedRow className="hidden min-h-12 flex-1 lg:block lg:min-h-20" />
 
-            <DashedRow className="px-6 py-6 sm:px-10">
+            <DashedRow className="px-6 pt-10 pb-6 sm:px-10 lg:py-6">
               <Reveal>
                 <h1 className="text-[2.75rem] leading-[0.95] font-semibold tracking-[-0.045em] text-pretty sm:text-6xl lg:text-[4.5rem]">
                   {hero.title}
@@ -86,7 +91,7 @@ export function Hero() {
 
             <DashedRow className="px-6 py-6 sm:px-10">
               <Reveal delay={0.08}>
-                <p className="max-w-xl text-lg leading-snug text-foreground/85 sm:text-xl">
+                <p className="mx-auto max-w-xl text-lg leading-snug text-foreground/85 sm:text-xl lg:mx-0">
                   {hero.subtitle}
                 </p>
               </Reveal>
@@ -94,7 +99,7 @@ export function Hero() {
 
             <DashedRow className="px-6 py-4 sm:px-10 sm:py-0">
               <Reveal delay={0.16}>
-                <div className="flex flex-col gap-3 sm:flex-row">
+                <div className="flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
                   <HeroButton href={hero.primaryCta.href} variant="primary">
                     {hero.primaryCta.label}
                   </HeroButton>

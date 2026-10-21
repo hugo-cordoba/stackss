@@ -11,10 +11,10 @@ export function AnnouncementBanner() {
   if (!visible) return null
 
   return (
-    <div className="relative flex items-center justify-center gap-2 bg-primary px-4 py-2.5 text-center text-sm font-medium text-primary-foreground">
+    <div className="relative flex items-center bg-primary px-4 py-2.5 pr-11 text-sm font-medium text-primary-foreground sm:justify-center sm:px-4 sm:pr-4 sm:text-center">
       <Link
         href={announcementBanner.href}
-        className="inline-flex items-center gap-1.5 hover:underline"
+        className="inline-flex flex-wrap items-center gap-1.5 hover:underline sm:flex-nowrap sm:justify-center"
       >
         <span>{announcementBanner.message}</span>
         <span className="inline-flex items-center gap-0.5 whitespace-nowrap font-semibold">
@@ -26,7 +26,7 @@ export function AnnouncementBanner() {
         type="button"
         onClick={() => setVisible(false)}
         aria-label="Cerrar aviso"
-        className="absolute right-3 inline-flex size-6 items-center justify-center rounded-full text-primary-foreground/80 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
+        className="absolute top-1/2 right-3 inline-flex size-6 -translate-y-1/2 items-center justify-center rounded-full text-primary-foreground/80 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
       >
         <X className="size-4" aria-hidden="true" />
       </button>

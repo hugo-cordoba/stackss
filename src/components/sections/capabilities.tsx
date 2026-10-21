@@ -2,6 +2,10 @@ import type { ComponentType, CSSProperties, ReactNode } from "react"
 import { Check, MousePointerClick } from "lucide-react"
 import { cn } from "cn"
 import { Reveal } from "@/components/motion/reveal"
+import {
+  SnapCarousel,
+  type CarouselItem,
+} from "@/components/sections/snap-carousel"
 import { getIcon } from "@/lib/icons"
 import { capabilities } from "@/content/site"
 
@@ -412,14 +416,51 @@ const visuals: Record<string, ComponentType> = {
 export function Capabilities() {
   const lastIndex = capabilities.items.length - 1
 
+  // En móvil cada servicio es una tarjeta (borde sólido + fondo card) dentro
+  // de un carrusel. Desde sm se convierte en la celda del bento con líneas
+  // discontinuas de siempre.
+  const items: CarouselItem[] = capabilities.items.map((item, index) => {
+    const Icon = getIcon(item.icon)
+    const Visual = visuals[item.visual]
+    return {
+      key: item.title,
+      className: cn(
+        "max-sm:border max-sm:border-foreground/15 max-sm:bg-card",
+        "sm:border-r sm:border-b sm:border-dashed sm:border-foreground/15",
+        item.size === "lg" && "sm:col-span-2",
+        // Evita una celda huérfana en tablet (2 columnas).
+        index === lastIndex && "sm:max-lg:col-span-2"
+      ),
+      content: (
+        <article className="flex h-full w-full flex-col gap-6 p-5 sm:gap-8 sm:p-8">
+          <div>
+            <span
+              className="flex size-9 items-center justify-center border border-brand/60"
+              style={{ background: tint(14), color: INK }}
+            >
+              <Icon className="size-4.5" aria-hidden="true" />
+            </span>
+            <h3 className="mt-5 text-lg font-semibold tracking-tight">
+              {item.title}
+            </h3>
+            <p className="mt-2 max-w-md text-sm text-muted-foreground">
+              {item.description}
+            </p>
+          </div>
+          <div className="mt-auto">{Visual && <Visual />}</div>
+        </article>
+      ),
+    }
+  })
+
   return (
-    <section id="capacidades" className="py-20">
+    <section id="capacidades" className="py-16 sm:py-20">
       <div className={cn("border-y", DASH)}>
         {/* Cabecera */}
         <div className={cn("border-b", DASH)}>
           <div
             className={cn(
-              "mx-auto max-w-6xl px-6 py-12 sm:border-x sm:px-10",
+              "mx-auto max-w-6xl px-6 py-10 sm:border-x sm:px-10 sm:py-12",
               DASH
             )}
           >
@@ -435,48 +476,17 @@ export function Capabilities() {
           </div>
         </div>
 
-        {/* Bento: celdas separadas por líneas discontinuas */}
+        {/* Móvil: carrusel de tarjetas. Escritorio: bento con celdas separadas
+            por líneas discontinuas. */}
         <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
-          {/* -mr-px / -mb-px + overflow-hidden recortan el último borde de cada celda */}
-          <div className="overflow-hidden">
-            <ul className="-mr-px -mb-px grid sm:grid-cols-2 lg:grid-cols-3">
-              {capabilities.items.map((item, index) => {
-                const Icon = getIcon(item.icon)
-                const Visual = visuals[item.visual]
-                return (
-                  <li
-                    key={item.title}
-                    className={cn(
-                      "border-r border-b",
-                      DASH,
-                      item.size === "lg" && "sm:col-span-2",
-                      // Evita una celda huérfana en tablet (2 columnas).
-                      index === lastIndex && "sm:max-lg:col-span-2"
-                    )}
-                  >
-                    <Reveal delay={(index % 3) * 0.08} className="h-full">
-                      <article className="flex h-full flex-col gap-8 p-6 sm:p-8">
-                        <div>
-                          <span
-                            className="flex size-9 items-center justify-center border border-brand/60"
-                            style={{ background: tint(14), color: INK }}
-                          >
-                            <Icon className="size-4.5" aria-hidden="true" />
-                          </span>
-                          <h3 className="mt-5 text-lg font-semibold tracking-tight">
-                            {item.title}
-                          </h3>
-                          <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                            {item.description}
-                          </p>
-                        </div>
-                        <div className="mt-auto">{Visual && <Visual />}</div>
-                      </article>
-                    </Reveal>
-                  </li>
-                )
-              })}
-            </ul>
+          {/* sm:-mr-px / sm:-mb-px + overflow-hidden recortan el último borde de cada celda */}
+          <div className="py-6 sm:overflow-hidden sm:py-0">
+            <SnapCarousel
+              label="Servicios"
+              listClassName="sm:-mr-px sm:-mb-px sm:grid sm:grid-cols-2 lg:grid-cols-3"
+              itemClassName="max-sm:w-[88%]"
+              items={items}
+            />
           </div>
         </div>
       </div>
