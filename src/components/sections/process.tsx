@@ -21,22 +21,22 @@ export function Process() {
   return (
     <section
       id="proceso"
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
+      className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8"
     >
       <Reveal>
         <div className="max-w-2xl">
           <MonoTag>{process.eyebrow}</MonoTag>
-          <h2 className="mt-5 text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:text-5xl">
+          <h2 className="mt-3 text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl">
             {process.title}
           </h2>
-          <p className="mt-4 text-lg leading-snug text-foreground/85">
+          <p className="mt-3 text-base leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
             {process.subtitle}
           </p>
         </div>
       </Reveal>
 
       {/* 2x2 en móvil y tablet, 4 columnas escalonadas en escritorio */}
-      <ol className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-4 lg:grid-cols-4 lg:items-start">
+      <ol className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-14 sm:gap-4 lg:grid-cols-4 lg:items-start">
         {process.steps.map((step, index) => {
           const Icon = getIcon(step.icon)
           const isLast = index === lastIndex

@@ -52,7 +52,7 @@ export function Navbar() {
   const closeMenu = () => setOpen(false)
 
   return (
-    <header className="sticky top-4 z-40 mt-4 h-14 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-3 z-40 mt-3 h-14 px-4 sm:top-4 sm:mt-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ y: -80, opacity: 0, maxWidth: WIDTH_TOP }}
         animate={{
@@ -64,12 +64,8 @@ export function Navbar() {
         className="relative mx-auto w-full"
       >
         <div
-          className={cn(
-            "flex h-14 items-center justify-between rounded-xl pr-2 pl-5 ring-1 ring-foreground/10 backdrop-blur-xl transition-[background-color,box-shadow] duration-300",
-            scrolled
-              ? "bg-background/90 shadow-lg shadow-foreground/5"
-              : "bg-background/60 shadow-sm"
-          )}
+          data-scrolled={scrolled}
+          className="liquid-glass flex h-14 items-center justify-between rounded-xl pr-2 pl-5"
         >
           <Link
             href="/"

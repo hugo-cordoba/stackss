@@ -143,6 +143,80 @@
   }
 }
 
+@layer components {
+  .liquid-glass {
+    --glass: 58%;
+    --glass-drop: 0 4px 16px -6px rgb(0 0 0 / 0.1);
+    position: relative;
+    background-color: color-mix(in oklch, var(--background) var(--glass), transparent);
+    background-image: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.45),
+      rgb(255 255 255 / 0.08) 45%,
+      rgb(255 255 255 / 0.25)
+    );
+    -webkit-backdrop-filter: blur(12px) saturate(1.5);
+    backdrop-filter: blur(12px) saturate(1.5);
+    box-shadow:
+      0 0 0 1px color-mix(in oklch, var(--foreground) 7%, transparent),
+      inset 0 1px 0 rgb(255 255 255 / 0.7),
+      inset 0 -1px 0 rgb(0 0 0 / 0.04),
+      var(--glass-drop);
+    transition:
+      background-color 0.3s,
+      box-shadow 0.3s;
+  }
+
+  /* Borde de luz degradado: brilla en las esquinas superior-izquierda e inferior-derecha */
+  .liquid-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      160deg,
+      rgb(255 255 255 / 0.8),
+      rgb(255 255 255 / 0) 35%,
+      rgb(255 255 255 / 0) 65%,
+      rgb(255 255 255 / 0.5)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  .liquid-glass[data-scrolled="true"] {
+    --glass: 78%;
+    --glass-drop: 0 10px 30px -10px rgb(0 0 0 / 0.18);
+  }
+
+  .dark .liquid-glass {
+    --glass-drop: 0 8px 24px -10px rgb(0 0 0 / 0.5);
+    background-image: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.1),
+      rgb(255 255 255 / 0.02) 45%,
+      rgb(255 255 255 / 0.06)
+    );
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.08),
+      inset 0 1px 0 rgb(255 255 255 / 0.16),
+      inset 0 -1px 0 rgb(0 0 0 / 0.3),
+      var(--glass-drop);
+  }
+
+  .dark .liquid-glass[data-scrolled="true"] {
+    --glass-drop: 0 12px 32px -10px rgb(0 0 0 / 0.65);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

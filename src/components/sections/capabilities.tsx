@@ -432,7 +432,7 @@ export function Capabilities() {
         index === lastIndex && "sm:max-lg:col-span-2"
       ),
       content: (
-        <article className="flex h-full w-full flex-col gap-6 p-5 sm:gap-8 sm:p-8">
+        <article className="flex h-full w-full flex-col gap-5 p-5 sm:gap-8 sm:p-8">
           <div>
             <span
               className="flex size-9 items-center justify-center border border-brand/60"
@@ -440,7 +440,7 @@ export function Capabilities() {
             >
               <Icon className="size-4.5" aria-hidden="true" />
             </span>
-            <h3 className="mt-5 text-lg font-semibold tracking-tight">
+            <h3 className="mt-4 text-lg font-semibold tracking-tight sm:mt-5">
               {item.title}
             </h3>
             <p className="mt-2 max-w-md text-sm text-muted-foreground">
@@ -454,22 +454,22 @@ export function Capabilities() {
   })
 
   return (
-    <section id="capacidades" className="py-16 sm:py-20">
+    <section id="capacidades" className="py-10 sm:py-16">
       <div className={cn("border-y", DASH)}>
         {/* Cabecera */}
         <div className={cn("border-b", DASH)}>
           <div
             className={cn(
-              "mx-auto max-w-6xl px-6 py-10 sm:border-x sm:px-10 sm:py-12",
+              "mx-auto max-w-6xl px-4 py-7 sm:border-x sm:px-10 sm:py-12",
               DASH
             )}
           >
             <Reveal>
               <MonoTag>{capabilities.eyebrow}</MonoTag>
-              <h2 className="mt-5 max-w-2xl text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:text-5xl">
+              <h2 className="mt-3 max-w-2xl text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl">
                 {capabilities.title}
               </h2>
-              <p className="mt-4 max-w-xl text-lg leading-snug text-foreground/85">
+              <p className="mt-3 max-w-xl text-base leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
                 {capabilities.subtitle}
               </p>
             </Reveal>
@@ -480,7 +480,7 @@ export function Capabilities() {
             por líneas discontinuas. */}
         <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
           {/* sm:-mr-px / sm:-mb-px + overflow-hidden recortan el último borde de cada celda */}
-          <div className="py-6 sm:overflow-hidden sm:py-0">
+          <div className="py-5 sm:overflow-hidden sm:py-0">
             <SnapCarousel
               label="Servicios"
               listClassName="sm:-mr-px sm:-mb-px sm:grid sm:grid-cols-2 lg:grid-cols-3"

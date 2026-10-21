@@ -18,7 +18,7 @@ export function NavbarMobileMenu({ onClose }: { onClose: () => void }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -8, scale: 0.97 }}
       transition={{ duration: 0.25, ease: EASE }}
-      className="absolute inset-x-0 top-full mt-2 origin-top rounded-xl bg-background/95 p-3 shadow-xl ring-1 ring-foreground/10 backdrop-blur-xl md:hidden"
+      className="liquid-glass absolute inset-x-0 top-full mt-2 origin-top rounded-xl p-3 [--glass:88%] md:hidden"
     >
       <nav aria-label="Móvil" className="flex flex-col gap-1">
         {nav.links.map((link, index) => (

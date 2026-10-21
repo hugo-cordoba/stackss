@@ -39,14 +39,14 @@ function CtaButton({
 
 export function FinalCta() {
   return (
-    <section id="contacto" className="py-16 sm:py-20">
+    <section id="contacto" className="py-10 sm:py-16">
       <div className={cn("border-y", DASH)}>
         <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
           <div className="grid lg:grid-cols-2">
             {/* Texto: en móvil va debajo del dibujo (el borde superior lo separa) */}
             <div
               className={cn(
-                "flex flex-col justify-center border-t px-6 py-10 sm:px-10 sm:py-16 lg:border-t-0 lg:border-r",
+                "flex flex-col justify-center border-t px-4 py-7 sm:px-10 sm:py-16 lg:border-t-0 lg:border-r",
                 DASH
               )}
             >
@@ -55,14 +55,14 @@ export function FinalCta() {
                   <PulseDot />
                   {finalCta.eyebrow}
                 </MonoTag>
-                <h2 className="mt-5 max-w-xl text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:text-5xl">
+                <h2 className="mt-3 max-w-xl text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl">
                   {finalCta.title}
                 </h2>
-                <p className="mt-4 max-w-md text-lg leading-snug text-foreground/85">
+                <p className="mt-3 max-w-md text-base leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
                   {finalCta.subtitle}
                 </p>
 
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
                   <CtaButton href={finalCta.primaryCta.href} variant="primary">
                     {finalCta.primaryCta.label}
                   </CtaButton>
@@ -71,7 +71,7 @@ export function FinalCta() {
                   </CtaButton>
                 </div>
 
-                <ul className="mt-8 flex flex-wrap gap-2">
+                <ul className="mt-5 flex flex-wrap gap-2 sm:mt-8">
                   {finalCta.highlights.map((label) => (
                     <li key={label}>
                       <MonoTag tone="neutral">
@@ -88,10 +88,10 @@ export function FinalCta() {
             <Reveal delay={0.1} className="order-first h-full lg:order-none">
               <div
                 aria-hidden="true"
-                className="relative flex h-full flex-col justify-center gap-2.5 bg-muted/40 px-6 pt-14 pb-8 sm:px-10 sm:pt-16 sm:pb-14"
+                className="relative flex h-full flex-col justify-center gap-2.5 bg-muted/40 px-4 pt-12 pb-6 sm:px-10 sm:pt-16 sm:pb-14"
                 style={dotGrid}
               >
-                <MonoTag className="absolute top-3.5 left-6 sm:left-10">
+                <MonoTag className="absolute top-3.5 left-4 sm:left-10">
                   <PulseDot />
                   {finalCta.mockup.tag}
                 </MonoTag>

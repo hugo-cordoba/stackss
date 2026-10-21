@@ -81,23 +81,23 @@ export function Hero() {
             {/* Fila vacía: solo escritorio (absorbe el espacio sobrante y marca la rejilla) */}
             <DashedRow className="hidden min-h-12 flex-1 lg:block lg:min-h-20" />
 
-            <DashedRow className="px-6 pt-10 pb-6 sm:px-10 lg:py-6">
+            <DashedRow className="px-4 pt-8 pb-5 sm:px-10 sm:pt-10 sm:pb-6 lg:py-6">
               <Reveal>
-                <h1 className="text-[2.75rem] leading-[0.95] font-semibold tracking-[-0.045em] text-pretty sm:text-6xl lg:text-[4.5rem]">
+                <h1 className="text-[2.5rem] leading-[0.95] font-semibold tracking-[-0.045em] text-pretty sm:text-6xl lg:text-[4.5rem]">
                   {hero.title}
                 </h1>
               </Reveal>
             </DashedRow>
 
-            <DashedRow className="px-6 py-6 sm:px-10">
+            <DashedRow className="px-4 py-4 sm:px-10 sm:py-6">
               <Reveal delay={0.08}>
-                <p className="mx-auto max-w-xl text-lg leading-snug text-foreground/85 sm:text-xl lg:mx-0">
+                <p className="mx-auto max-w-xl text-base leading-snug text-foreground/85 sm:text-xl lg:mx-0">
                   {hero.subtitle}
                 </p>
               </Reveal>
             </DashedRow>
 
-            <DashedRow className="px-6 py-4 sm:px-10 sm:py-0">
+            <DashedRow className="px-4 py-4 sm:px-10 sm:py-0">
               <Reveal delay={0.16}>
                 <div className="flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
                   <HeroButton href={hero.primaryCta.href} variant="primary">
@@ -114,7 +114,7 @@ export function Hero() {
           {/* Ilustración */}
           <div
             className={cn(
-              "flex items-center justify-center border-t p-6 lg:border-t-0 lg:p-8",
+              "flex items-center justify-center border-t p-4 sm:p-6 lg:border-t-0 lg:p-8",
               DASH
             )}
           >
@@ -143,7 +143,7 @@ export function Hero() {
                 <li
                   key={name}
                   className={cn(
-                    "flex h-20 items-center justify-center border-r border-b px-3 text-center text-lg font-semibold tracking-tight text-foreground/80 sm:h-[88px]",
+                    "flex h-14 items-center justify-center border-r border-b px-3 text-center text-base font-semibold tracking-tight text-foreground/80 sm:h-[88px] sm:text-lg",
                     DASH
                   )}
                 >

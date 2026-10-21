@@ -18,7 +18,7 @@ export function Problem() {
     return {
       key: item.title,
       content: (
-        <article className="group relative flex h-full w-full flex-col gap-12 overflow-hidden border border-foreground/10 bg-muted/40 p-6 transition-colors duration-300 hover:border-destructive/40 hover:bg-card sm:p-7">
+        <article className="group relative flex h-full w-full flex-col gap-8 overflow-hidden border border-foreground/10 bg-muted/40 p-5 transition-colors duration-300 hover:border-destructive/40 hover:bg-card sm:gap-12 sm:p-7">
           {/* Rejilla de puntos que se desvanece hacia abajo */}
           <div
             aria-hidden="true"
@@ -52,16 +52,16 @@ export function Problem() {
   })
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
       <Reveal>
-        <div className="grid items-end gap-6 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-end gap-3 sm:gap-6 lg:grid-cols-2 lg:gap-16">
           <div>
             <MonoTag tone="danger">{problem.eyebrow}</MonoTag>
-            <h2 className="mt-5 max-w-xl text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:text-5xl">
+            <h2 className="mt-3 max-w-xl text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl">
               {problem.title}
             </h2>
           </div>
-          <p className="max-w-md text-lg leading-snug text-foreground/85 lg:justify-self-end">
+          <p className="max-w-md text-base leading-snug text-foreground/85 sm:text-lg lg:justify-self-end">
             {problem.subtitle}
           </p>
         </div>
@@ -69,7 +69,7 @@ export function Problem() {
 
       <SnapCarousel
         label="Problemas habituales"
-        className="mt-10 sm:mt-12"
+        className="mt-6 sm:mt-12"
         // En móvil el carrusel sangra hasta los bordes de la pantalla (-mx-4
         // compensa el px-4 de la sección); desde sm vuelve a ser el grid de 3.
         listClassName="max-sm:-mx-4 sm:grid sm:grid-cols-3 sm:gap-4"

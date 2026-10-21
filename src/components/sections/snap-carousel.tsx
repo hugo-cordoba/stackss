@@ -84,7 +84,7 @@ export function SnapCarousel({
         {/* Indicadores (solo móvil) */}
         <div
           className={cn(
-            "mt-5 flex items-center justify-center sm:hidden",
+            "mt-3 flex items-center justify-center sm:hidden",
             dotsClassName
           )}
         >

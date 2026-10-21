@@ -14,20 +14,20 @@ import { solution } from "@/content/site"
 
 export function Solution() {
   return (
-    <section id="solucion" className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+    <section id="solucion" className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
       <Reveal>
-        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+        <div className="mx-auto flex max-w-2xl flex-col items-start text-left sm:items-center sm:text-center">
           <MonoTag>{solution.eyebrow}</MonoTag>
-          <h2 className="mt-5 text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:text-5xl">
+          <h2 className="mt-3 text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl">
             {solution.title}
           </h2>
-          <p className="mt-4 text-lg leading-snug text-foreground/85">
+          <p className="mt-3 text-base leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
             {solution.subtitle}
           </p>
         </div>
       </Reveal>
 
-      <div className="mt-10 flex flex-col gap-12 sm:mt-16 sm:gap-20 lg:gap-24">
+      <div className="mt-8 flex flex-col gap-10 sm:mt-14 sm:gap-16 lg:gap-20">
         {solution.blocks.map((block, index) => {
           const Icon = getIcon(block.icon)
           const reversed = index % 2 === 1
@@ -35,7 +35,7 @@ export function Solution() {
             <div
               key={block.title}
               className={cn(
-                "grid items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-16",
+                "grid items-center gap-5 sm:gap-10 lg:grid-cols-2 lg:gap-16",
                 reversed && "lg:[&>*:first-child]:order-2"
               )}
             >
@@ -53,14 +53,14 @@ export function Solution() {
                     </MonoTag>
                   </div>
 
-                  <h3 className="mt-5 text-2xl leading-tight font-semibold tracking-tight text-pretty sm:mt-6 sm:text-3xl">
+                  <h3 className="mt-4 text-xl leading-tight font-semibold tracking-tight text-pretty sm:mt-6 sm:text-3xl">
                     {block.title}
                   </h3>
-                  <p className="mt-3 max-w-lg text-muted-foreground">
+                  <p className="mt-2 max-w-lg text-sm text-muted-foreground sm:mt-3 sm:text-base">
                     {block.description}
                   </p>
 
-                  <ul className="mt-5 flex flex-col gap-3 sm:mt-6">
+                  <ul className="mt-4 flex flex-col gap-2.5 sm:mt-6 sm:gap-3">
                     {block.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-3 text-sm">
                         <span
@@ -103,10 +103,10 @@ function Stage({
   return (
     <div
       aria-hidden="true"
-      className="relative border border-foreground/10 bg-muted/40 px-5 pt-14 pb-6 sm:px-8 sm:pb-8"
+      className="relative border border-foreground/10 bg-muted/40 px-4 pt-12 pb-4 sm:px-8 sm:pt-14 sm:pb-8"
       style={dotGrid}
     >
-      <MonoTag className="absolute top-3.5 left-5 sm:left-8">
+      <MonoTag className="absolute top-3 left-4 sm:top-3.5 sm:left-8">
         {live && <PulseDot />}
         {label}
       </MonoTag>
@@ -121,7 +121,7 @@ function Step({ state, children }: { state: StepState; children: ReactNode }) {
   return (
     <div
       className={cn(
-        "flex items-center gap-3 border bg-card px-3 py-2.5 text-sm font-medium",
+        "flex items-center gap-3 border bg-card px-3 py-2 text-sm font-medium sm:py-2.5",
         state === "active" ? "border-brand/60" : "border-foreground/15",
         state === "pending" ? "text-muted-foreground" : "text-foreground"
       )}
