@@ -55,7 +55,7 @@ export function Navbar() {
   return (
     <header className="sticky top-4 z-40 mt-4 h-14 px-4 sm:px-6 lg:px-8">
       <motion.div
-        initial={{ y: -80, opacity: 0 }}
+        initial={{ y: -80, opacity: 0, maxWidth: WIDTH_TOP }}
         animate={{
           y: 0,
           opacity: 1,
