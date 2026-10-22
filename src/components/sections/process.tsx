@@ -26,26 +26,27 @@ export function Process() {
       <Reveal>
         <div className="max-w-2xl">
           <MonoTag>{process.eyebrow}</MonoTag>
-          <h2 className="mt-3 text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl">
+          <h2 className="mt-3 text-[1.75rem] leading-[1.08] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl sm:leading-[1.05]">
             {process.title}
           </h2>
-          <p className="mt-3 text-base leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
+          <p className="mt-3 text-[0.9375rem] leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
             {process.subtitle}
           </p>
         </div>
       </Reveal>
 
-      {/* 2x2 en móvil y tablet, 4 columnas escalonadas en escritorio */}
-      <ol className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-14 sm:gap-4 lg:grid-cols-4 lg:items-start">
+      {/* Móvil: lista vertical (1 columna). Tablet: 2x2. Escritorio: 4 columnas escalonadas. */}
+      <ol className="mt-6 grid grid-cols-1 gap-2.5 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 lg:items-start">
         {process.steps.map((step, index) => {
           const Icon = getIcon(step.icon)
           const isLast = index === lastIndex
           return (
             <li key={step.number} className={cn("relative", OFFSETS[index])}>
               <Reveal delay={index * 0.08} className="h-full">
+                {/* Móvil: fila (columna de icono + texto). Desde sm: tarjeta vertical. */}
                 <article
                   className={cn(
-                    "flex h-full flex-col border bg-card",
+                    "relative flex h-full border bg-card sm:flex-col",
                     isLast ? "border-brand/60" : "border-foreground/10"
                   )}
                 >
@@ -53,17 +54,19 @@ export function Process() {
                   <div
                     aria-hidden="true"
                     className={cn(
-                      "relative flex h-24 items-end justify-between p-3 sm:h-32 sm:p-4",
-                      !isLast && "bg-muted/40"
+                      "relative flex w-16 shrink-0 flex-col items-center justify-between border-r p-3",
+                      "sm:h-32 sm:w-auto sm:flex-row sm:items-end sm:border-r-0 sm:p-4",
+                      isLast ? "border-brand/40" : "border-foreground/10 bg-muted/40"
                     )}
                     style={{
                       ...dotGrid,
                       ...(isLast ? { backgroundColor: tint(22) } : {}),
                     }}
                   >
+                    {/* En móvil el número grande ya identifica el paso */}
                     <MonoTag
                       tone={isLast ? "brand" : "neutral"}
-                      className="absolute top-2.5 left-3 sm:top-3.5 sm:left-4"
+                      className="absolute top-3.5 left-4 max-sm:hidden"
                     >
                       {isLast && <PulseDot />}
                       Paso {step.number}
@@ -76,19 +79,27 @@ export function Process() {
                       <Icon className="size-4 sm:size-5" />
                     </span>
 
-                    <span className="font-mono text-3xl leading-none font-semibold tracking-tight text-foreground/15 sm:text-4xl">
+                    <span className="font-mono text-2xl leading-none font-semibold tracking-tight text-foreground/15 sm:text-4xl">
                       {step.number}
                     </span>
                   </div>
 
-                  <div className="p-3.5 sm:p-5">
-                    <h3 className="text-sm font-semibold tracking-tight sm:text-base">
+                  <div className="min-w-0 flex-1 p-3.5 sm:p-5">
+                    <h3 className="text-[0.9375rem] font-semibold tracking-tight sm:text-base">
                       {step.title}
                     </h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground sm:mt-2 sm:text-sm sm:leading-normal">
+                    <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground sm:mt-2 sm:text-sm sm:leading-normal">
                       {step.description}
                     </p>
                   </div>
+
+                  {/* Conector vertical entre tarjetas (solo móvil), alineado con el centro de la columna del icono */}
+                  {!isLast && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-full left-8 h-2.5 border-l border-dashed border-brand/70 sm:hidden"
+                    />
+                  )}
                 </article>
               </Reveal>
 

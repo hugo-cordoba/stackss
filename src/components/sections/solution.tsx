@@ -18,16 +18,16 @@ export function Solution() {
       <Reveal>
         <div className="mx-auto flex max-w-2xl flex-col items-start text-left sm:items-center sm:text-center">
           <MonoTag>{solution.eyebrow}</MonoTag>
-          <h2 className="mt-3 text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl">
+          <h2 className="mt-3 text-[1.75rem] leading-[1.08] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl sm:leading-[1.05]">
             {solution.title}
           </h2>
-          <p className="mt-3 text-base leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
+          <p className="mt-3 text-[0.9375rem] leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
             {solution.subtitle}
           </p>
         </div>
       </Reveal>
 
-      <div className="mt-8 flex flex-col gap-10 sm:mt-14 sm:gap-16 lg:gap-20">
+      <div className="mt-7 flex flex-col gap-8 sm:mt-14 sm:gap-16 lg:gap-20">
         {solution.blocks.map((block, index) => {
           const Icon = getIcon(block.icon)
           const reversed = index % 2 === 1
@@ -36,6 +36,8 @@ export function Solution() {
               key={block.title}
               className={cn(
                 "grid items-center gap-5 sm:gap-10 lg:grid-cols-2 lg:gap-16",
+                // En móvil, una línea discontinua separa cada bloque del anterior.
+                "max-sm:not-first:border-t max-sm:not-first:border-dashed max-sm:not-first:border-foreground/15 max-sm:not-first:pt-8",
                 reversed && "lg:[&>*:first-child]:order-2"
               )}
             >
@@ -43,26 +45,31 @@ export function Solution() {
                 <div>
                   <div className="flex items-center gap-3">
                     <span
-                      className="flex size-10 items-center justify-center border border-brand/60"
+                      className="flex size-9 shrink-0 items-center justify-center border border-brand/60 sm:size-10"
                       style={{ background: tint(14), color: INK }}
                     >
-                      <Icon className="size-5" aria-hidden="true" />
+                      <Icon className="size-[1.125rem] sm:size-5" aria-hidden="true" />
                     </span>
-                    <MonoTag tone="neutral">
-                      {String(index + 1).padStart(2, "0")} · {block.eyebrow}
+                    {/* min-w-0 + truncate: en pantallas de 320-360px el eyebrow más largo no desborda */}
+                    <MonoTag tone="neutral" className="min-w-0">
+                      <span className="shrink-0">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span aria-hidden="true">·</span>
+                      <span className="truncate">{block.eyebrow}</span>
                     </MonoTag>
                   </div>
 
                   <h3 className="mt-4 text-xl leading-tight font-semibold tracking-tight text-pretty sm:mt-6 sm:text-3xl">
                     {block.title}
                   </h3>
-                  <p className="mt-2 max-w-lg text-sm text-muted-foreground sm:mt-3 sm:text-base">
+                  <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground sm:mt-3 sm:text-base">
                     {block.description}
                   </p>
 
                   <ul className="mt-4 flex flex-col gap-2.5 sm:mt-6 sm:gap-3">
                     {block.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-3 text-sm">
+                      <li key={bullet} className="flex items-start gap-3 text-sm leading-snug">
                         <span
                           className="mt-px flex size-5 shrink-0 items-center justify-center border border-brand/60"
                           style={{ background: tint(14), color: INK }}
@@ -103,10 +110,10 @@ function Stage({
   return (
     <div
       aria-hidden="true"
-      className="relative border border-foreground/10 bg-muted/40 px-4 pt-12 pb-4 sm:px-8 sm:pt-14 sm:pb-8"
+      className="relative border border-foreground/10 bg-muted/40 px-3 pt-11 pb-3 sm:px-8 sm:pt-14 sm:pb-8"
       style={dotGrid}
     >
-      <MonoTag className="absolute top-3 left-4 sm:top-3.5 sm:left-8">
+      <MonoTag className="absolute top-2.5 left-3 sm:top-3.5 sm:left-8">
         {live && <PulseDot />}
         {label}
       </MonoTag>
@@ -152,7 +159,7 @@ function SolutionMockup({ type }: { type: string }) {
     ]
     return (
       <Stage label="Flujo activo" live>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5 sm:gap-2">
           {steps.map((step) => (
             <Step key={step.label} state={step.state}>
               {step.label}
@@ -166,14 +173,14 @@ function SolutionMockup({ type }: { type: string }) {
   if (type === "chat") {
     return (
       <Stage label="Agente IA" live>
-        <div className="flex flex-col gap-2.5">
-          <div className="max-w-[80%] self-start border border-foreground/15 bg-card px-3 py-2 text-sm">
+        <div className="flex flex-col gap-2 sm:gap-2.5">
+          <div className="max-w-[85%] self-start border border-foreground/15 bg-card px-3 py-2 text-sm">
             ¿Cuánto tarda el envío a Barcelona?
           </div>
-          <div className="max-w-[80%] self-end bg-brand px-3 py-2 text-sm text-primary-foreground">
+          <div className="max-w-[85%] self-end bg-brand px-3 py-2 text-sm text-primary-foreground">
             Entre 24 y 48 horas laborables. ¿Quieres que te avise cuando salga de almacén?
           </div>
-          <div className="max-w-[80%] self-start border border-foreground/15 bg-card px-3 py-2 text-sm">
+          <div className="max-w-[85%] self-start border border-foreground/15 bg-card px-3 py-2 text-sm">
             Sí, por favor
           </div>
         </div>
@@ -192,7 +199,7 @@ function SolutionMockup({ type }: { type: string }) {
             tuempresa.com
           </span>
         </div>
-        <div className="flex flex-col gap-2 p-5">
+        <div className="flex flex-col gap-2 p-4 sm:p-5">
           <span className="h-3 w-4/5 bg-foreground/75" />
           <span className="h-3 w-3/5 bg-foreground/75" />
           <span className="mt-1 h-1.5 w-11/12 bg-foreground/15" />

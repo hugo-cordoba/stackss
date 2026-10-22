@@ -18,7 +18,7 @@ export function NavbarMobileMenu({ onClose }: { onClose: () => void }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -8, scale: 0.97 }}
       transition={{ duration: 0.25, ease: EASE }}
-      className="liquid-glass absolute inset-x-0 top-full mt-2 origin-top rounded-xl p-3 [--glass:88%] md:hidden"
+      className="liquid-glass absolute inset-x-0 top-full mt-2 max-h-[calc(100dvh-6rem)] origin-top overflow-y-auto overscroll-contain rounded-xl p-3 [--glass:88%] md:hidden"
     >
       <nav aria-label="Móvil" className="flex flex-col gap-1">
         {nav.links.map((link, index) => (
@@ -27,7 +27,7 @@ export function NavbarMobileMenu({ onClose }: { onClose: () => void }) {
           </MobileLink>
         ))}
 
-        <p className="mt-2 px-4 text-xs font-medium text-muted-foreground">
+        <p className="mt-1 border-t border-border/60 px-4 pt-3 pb-1 text-xs font-medium text-muted-foreground">
           {nav.company.label}
         </p>
 
@@ -86,7 +86,7 @@ function MobileLink({
       <Link
         href={href}
         onClick={onClick}
-        className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted"
+        className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted active:bg-muted"
       >
         {children}
       </Link>

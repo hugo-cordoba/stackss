@@ -37,6 +37,8 @@ export function Navbar() {
   // Solo controla el ancho/sombra compactos; la barra siempre permanece visible.
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 24)
+    // Si haces scroll con el menú móvil abierto, se cierra.
+    if (open) setOpen(false)
   })
 
   // Cerrar el menú móvil con Escape.
@@ -52,7 +54,7 @@ export function Navbar() {
   const closeMenu = () => setOpen(false)
 
   return (
-    <header className="sticky top-3 z-40 mt-3 h-14 px-4 sm:top-4 sm:mt-4 sm:px-6 lg:px-8">
+    <header className="sticky top-2 z-40 mt-2 h-12 px-4 sm:top-4 sm:mt-4 sm:h-14 sm:px-6 lg:px-8">
       <motion.div
         initial={{ y: -80, opacity: 0, maxWidth: WIDTH_TOP }}
         animate={{
@@ -65,7 +67,7 @@ export function Navbar() {
       >
         <div
           data-scrolled={scrolled}
-          className="liquid-glass flex h-14 items-center justify-between rounded-xl pr-2 pl-5"
+          className="liquid-glass flex h-12 items-center justify-between rounded-xl pr-1.5 pl-4 sm:h-14 sm:pr-2 sm:pl-5"
         >
           <Link
             href="/"
@@ -108,7 +110,7 @@ export function Navbar() {
             <Button
               variant="secondary"
               size="icon"
-              className="rounded-lg"
+              className="size-10! rounded-lg"
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -139,6 +141,20 @@ export function Navbar() {
           {open && <NavbarMobileMenu onClose={closeMenu} />}
         </AnimatePresence>
       </motion.div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={closeMenu}
+            className="fixed inset-0 -z-10 bg-black/20 md:hidden dark:bg-black/40"
+          />
+        )}
+      </AnimatePresence>
     </header>
   )
 }

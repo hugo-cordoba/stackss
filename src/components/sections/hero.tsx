@@ -11,6 +11,11 @@ import { hero, techMarquee } from "@/content/site"
 
 const DASH = "border-dashed border-foreground/15"
 
+// Desvanece los extremos de la cinta de tecnologías (solo móvil).
+const FADE_X =
+  "linear-gradient(to right, transparent, black 12%, black 88%, transparent)"
+const fadeX: CSSProperties = { maskImage: FADE_X, WebkitMaskImage: FADE_X }
+
 // Fila con borde inferior discontinuo que además se prolonga hasta el borde
 // izquierdo de la pantalla (el section tiene overflow-hidden para recortarla).
 function DashedRow({
@@ -47,10 +52,10 @@ function HeroButton({
     <Link
       href={href}
       className={cn(
-        "group inline-flex h-12 items-center justify-center gap-3 px-5 font-mono text-sm tracking-wide whitespace-nowrap uppercase transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "group inline-flex items-center justify-center gap-3 px-5 font-mono text-sm tracking-wide whitespace-nowrap uppercase transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         variant === "primary"
-          ? "bg-foreground text-background hover:bg-foreground/85"
-          : "border border-foreground/15 bg-background text-foreground hover:bg-muted"
+          ? "h-12 bg-foreground text-background hover:bg-foreground/85 active:bg-foreground/80"
+          : "h-11 border border-foreground/15 bg-background text-foreground hover:bg-muted active:bg-muted sm:h-12"
       )}
     >
       {children}
@@ -59,6 +64,29 @@ function HeroButton({
         aria-hidden="true"
       />
     </Link>
+  )
+}
+
+// Una de las dos copias idénticas de la cinta. La segunda es solo visual
+// (aria-hidden) y se oculta si el usuario prefiere menos movimiento.
+function TechList({ hidden }: { hidden?: boolean }) {
+  return (
+    <ul
+      aria-hidden={hidden || undefined}
+      className={cn("flex shrink-0 items-center", hidden && "motion-reduce:hidden")}
+    >
+      {techMarquee.map((name) => (
+        <li
+          key={name}
+          className={cn(
+            "flex h-12 items-center border-r px-6 text-base font-semibold tracking-tight whitespace-nowrap text-foreground/80",
+            DASH
+          )}
+        >
+          {name}
+        </li>
+      ))}
+    </ul>
   )
 }
 
@@ -81,17 +109,17 @@ export function Hero() {
             {/* Fila vacía: solo escritorio (absorbe el espacio sobrante y marca la rejilla) */}
             <DashedRow className="hidden min-h-12 flex-1 lg:block lg:min-h-20" />
 
-            <DashedRow className="px-4 pt-8 pb-5 sm:px-10 sm:pt-10 sm:pb-6 lg:py-6">
+            <DashedRow className="px-4 pt-6 pb-4 sm:px-10 sm:pt-10 sm:pb-6 lg:py-6">
               <Reveal>
-                <h1 className="text-[2.5rem] leading-[0.95] font-semibold tracking-[-0.045em] text-pretty sm:text-6xl lg:text-[4.5rem]">
+                <h1 className="text-[2.25rem] leading-[0.97] font-semibold tracking-[-0.045em] text-pretty max-sm:text-balance min-[430px]:text-[2.5rem] sm:text-6xl lg:text-[4.5rem]">
                   {hero.title}
                 </h1>
               </Reveal>
             </DashedRow>
 
-            <DashedRow className="px-4 py-4 sm:px-10 sm:py-6">
+            <DashedRow className="px-4 py-3.5 sm:px-10 sm:py-6">
               <Reveal delay={0.08}>
-                <p className="mx-auto max-w-xl text-base leading-snug text-foreground/85 sm:text-xl lg:mx-0">
+                <p className="mx-auto max-w-xl text-[0.9375rem] leading-snug text-foreground/85 sm:text-xl lg:mx-0">
                   {hero.subtitle}
                 </p>
               </Reveal>
@@ -99,7 +127,7 @@ export function Hero() {
 
             <DashedRow className="px-4 py-4 sm:px-10 sm:py-0">
               <Reveal delay={0.16}>
-                <div className="flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+                <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3 sm:justify-center lg:justify-start">
                   <HeroButton href={hero.primaryCta.href} variant="primary">
                     {hero.primaryCta.label}
                   </HeroButton>
@@ -114,7 +142,7 @@ export function Hero() {
           {/* Ilustración */}
           <div
             className={cn(
-              "flex items-center justify-center border-t p-4 sm:p-6 lg:border-t-0 lg:p-8",
+              "flex items-center justify-center border-t px-4 py-3 sm:p-6 lg:border-t-0 lg:p-8",
               DASH
             )}
           >
@@ -125,25 +153,40 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Rejilla de tecnologías (a sangre) */}
+      {/* Tecnologías (a sangre) */}
       <div className={cn("border-y", DASH)}>
         <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
           <p
             className={cn(
-              "border-b px-6 py-3 text-center font-mono text-[0.7rem] tracking-widest text-muted-foreground uppercase",
+              "border-b px-6 py-2.5 text-center font-mono text-[0.625rem] tracking-widest text-muted-foreground uppercase sm:py-3 sm:text-[0.7rem]",
               DASH
             )}
           >
-            Algunas de las tecnologías con las que construimos
+            <span className="sm:hidden">Construimos con</span>
+            <span className="hidden sm:inline">
+              Algunas de las tecnologías con las que construimos
+            </span>
           </p>
-          {/* -mr-px / -mb-px + overflow-hidden recortan el último borde de cada celda */}
-          <div className="overflow-hidden">
-            <ul className="-mr-px -mb-px grid grid-cols-2 md:grid-cols-5">
+
+          {/* Móvil: una sola fila que se desplaza */}
+          <div
+            className="overflow-hidden [scrollbar-width:none] motion-reduce:overflow-x-auto md:hidden"
+            style={fadeX}
+          >
+            <div className="flex w-max animate-marquee">
+              <TechList />
+              <TechList hidden />
+            </div>
+          </div>
+
+          {/* Escritorio: rejilla. -mr-px / -mb-px + overflow-hidden recortan el último borde de cada celda */}
+          <div className="hidden overflow-hidden md:block">
+            <ul className="-mr-px -mb-px grid grid-cols-5">
               {techMarquee.map((name) => (
                 <li
                   key={name}
                   className={cn(
-                    "flex h-14 items-center justify-center border-r border-b px-3 text-center text-base font-semibold tracking-tight text-foreground/80 sm:h-[88px] sm:text-lg",
+                    "flex h-[88px] items-center justify-center border-r border-b px-3 text-center text-lg font-semibold tracking-tight text-foreground/80",
                     DASH
                   )}
                 >
@@ -295,7 +338,7 @@ function Tag({
   const shift = anchor === "start" ? "0%" : anchor === "end" ? "-100%" : "-50%"
   return (
     <span
-      className="absolute inline-flex items-center gap-[0.5em] border border-brand/60 px-[0.6em] py-[0.45em] font-mono leading-none tracking-wider whitespace-nowrap text-foreground uppercase [font-size:min(0.625rem,2.2cqw)]"
+      className="absolute inline-flex items-center gap-[0.5em] border border-brand/60 px-[0.6em] py-[0.45em] font-mono leading-none tracking-wider whitespace-nowrap text-foreground uppercase [font-size:min(0.625rem,2.6cqw)]"
       style={{
         left: `${(x / VB_W) * 100}%`,
         top: `${(y / VB_H) * 100}%`,

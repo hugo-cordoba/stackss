@@ -8,10 +8,10 @@ import { faq } from "@/content/site"
 
 export function FaqAccordion() {
   return (
-    <Accordion className="mt-10">
+    <Accordion className="mt-6 sm:mt-10">
       {faq.items.map((item) => (
         <AccordionItem key={item.question} value={item.question}>
-          <AccordionTrigger className="text-base">
+          <AccordionTrigger className="gap-4 py-4 text-base">
             {item.question}
           </AccordionTrigger>
           <AccordionContent>

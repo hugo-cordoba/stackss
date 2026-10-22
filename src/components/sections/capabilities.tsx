@@ -1,7 +1,15 @@
-import type { ComponentType, CSSProperties, ReactNode } from "react"
+import type { ComponentType, ReactNode } from "react"
 import { Check, MousePointerClick } from "lucide-react"
 import { cn } from "cn"
 import { Reveal } from "@/components/motion/reveal"
+import {
+  INK,
+  MonoTag,
+  PulseDot,
+  dotGrid,
+  fadeBottom,
+  tint,
+} from "@/components/sections/mono"
 import {
   SnapCarousel,
   type CarouselItem,
@@ -9,69 +17,19 @@ import {
 import { getIcon } from "@/lib/icons"
 import { capabilities } from "@/content/site"
 
-/* -------------------------------------------------------------------------- */
-/*  Tokens compartidos con el hero                                            */
-/* -------------------------------------------------------------------------- */
-
 const DASH = "border-dashed border-foreground/15"
-const INK = "color-mix(in oklch, var(--brand), var(--foreground) 55%)"
-const tint = (pct: number) =>
-  `color-mix(in oklch, var(--brand) ${pct}%, var(--card))`
-
-// Rejilla de puntos de fondo para los "escenarios" de cada tarjeta.
-const dotGrid: CSSProperties = {
-  backgroundImage:
-    "radial-gradient(color-mix(in oklch, var(--foreground) 14%, transparent) 1px, transparent 1px)",
-  backgroundSize: "14px 14px",
-}
-
-// Desvanece el contenido hacia abajo (como la lista de acciones de la referencia).
-const fadeBottom = (from = 60): CSSProperties => {
-  const mask = `linear-gradient(to bottom, black ${from}%, transparent)`
-  return { maskImage: mask, WebkitMaskImage: mask }
-}
 
 /* -------------------------------------------------------------------------- */
 /*  Piezas pequeñas                                                           */
 /* -------------------------------------------------------------------------- */
 
-function MonoTag({
-  children,
-  className,
-  tone = "brand",
-}: {
-  children: ReactNode
-  className?: string
-  tone?: "brand" | "neutral"
-}) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-1.5 border px-2 py-1.5 font-mono text-[0.625rem] leading-none tracking-wider whitespace-nowrap text-foreground uppercase",
-        tone === "brand" ? "border-brand/60" : "border-foreground/15 bg-card",
-        className
-      )}
-      style={tone === "brand" ? { background: tint(14) } : undefined}
-    >
-      {children}
-    </span>
-  )
-}
-
-function PulseDot() {
-  return (
-    <span
-      aria-hidden="true"
-      className="size-1.5 animate-pulse rounded-full bg-brand motion-reduce:animate-none"
-    />
-  )
-}
-
+// Altura 192px en móvil (antes 208px): las ilustraciones están pensadas para
+// recortarse por abajo, así que la tarjeta gana densidad sin perder lectura.
 function Stage({ children }: { children: ReactNode }) {
   return (
     <div
       aria-hidden="true"
-      className="relative h-52 overflow-hidden border border-foreground/15 bg-muted/40"
+      className="relative h-48 overflow-hidden border border-foreground/15 bg-muted/40 sm:h-52"
       style={dotGrid}
     >
       {children}
@@ -157,6 +115,8 @@ function FlowNode({
 // de la altura; las curvas terminan exactamente ahí.
 const FAN_ROWS = [100 / 6, 50, (100 * 5) / 6]
 
+// min-w-4 en móvil: con 24px el diagrama de integraciones se desbordaba
+// en pantallas de 360px y se recortaba.
 function FanLines({ mode }: { mode: "in" | "out" }) {
   return (
     <svg
@@ -164,7 +124,7 @@ function FanLines({ mode }: { mode: "in" | "out" }) {
       preserveAspectRatio="none"
       fill="none"
       aria-hidden="true"
-      className="h-full w-full min-w-6"
+      className="h-full w-full min-w-4 sm:min-w-6"
     >
       {FAN_ROWS.map((y) => (
         <path
@@ -210,8 +170,8 @@ function NodeColumn({
 function LandingVisual() {
   return (
     <Stage>
-      <MonoTag className="absolute top-2.5 left-6">Convierte</MonoTag>
-      <div className="absolute inset-x-6 top-10 bottom-0 border border-b-0 border-foreground/15 bg-card">
+      <MonoTag className="absolute top-2.5 left-4 sm:left-6">Convierte</MonoTag>
+      <div className="absolute inset-x-4 top-10 bottom-0 border border-b-0 border-foreground/15 bg-card sm:inset-x-6">
         <div className="flex items-center gap-1.5 border-b border-foreground/10 px-3 py-2">
           <span className="size-1.5 rounded-full bg-foreground/20" />
           <span className="size-1.5 rounded-full bg-foreground/20" />
@@ -220,12 +180,12 @@ function LandingVisual() {
             tuempresa.com
           </span>
         </div>
-        <div className="flex flex-col gap-2 p-4">
+        <div className="flex flex-col gap-2 p-3 sm:p-4">
           <span className="h-3 w-4/5 bg-foreground/75" />
           <span className="h-3 w-3/5 bg-foreground/75" />
           <span className="mt-1 h-1.5 w-11/12 bg-foreground/15" />
           <span className="h-1.5 w-3/4 bg-foreground/15" />
-          <div className="relative mt-3 w-fit">
+          <div className="relative mt-2.5 w-fit sm:mt-3">
             <span className="flex h-8 items-center bg-brand px-4 font-mono text-[0.625rem] tracking-wider text-primary-foreground uppercase">
               Reservar ahora
             </span>
@@ -245,9 +205,9 @@ function BlogVisual() {
   ]
   return (
     <Stage>
-      <MonoTag className="absolute top-2.5 left-6">/blog</MonoTag>
+      <MonoTag className="absolute top-2.5 left-4 sm:left-6">/blog</MonoTag>
       <div
-        className="absolute inset-x-6 top-12 flex flex-col gap-2"
+        className="absolute inset-x-4 top-12 flex flex-col gap-2 sm:inset-x-6"
         style={fadeBottom(60)}
       >
         {rows.map((row, index) => (
@@ -279,11 +239,11 @@ function BlogVisual() {
 function EcommerceVisual() {
   return (
     <Stage>
-      <MonoTag className="absolute top-2.5 left-6">Tienda</MonoTag>
-      <div className="absolute inset-x-6 top-12 bottom-0 flex gap-3">
-        <div className="flex w-[48%] flex-col border border-b-0 border-foreground/15 bg-card p-2.5">
-          <div className="relative h-20 overflow-hidden bg-brand/15">
-            <span className="absolute top-1/2 left-1/2 size-9 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-brand" />
+      <MonoTag className="absolute top-2.5 left-4 sm:left-6">Tienda</MonoTag>
+      <div className="absolute inset-x-4 top-12 bottom-0 flex gap-2.5 sm:inset-x-6 sm:gap-3">
+        <div className="flex w-[46%] flex-col border border-b-0 border-foreground/15 bg-card p-2.5 sm:w-[48%]">
+          <div className="relative h-16 overflow-hidden bg-brand/15 sm:h-20">
+            <span className="absolute top-1/2 left-1/2 size-8 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-brand sm:size-9" />
           </div>
           <span className="mt-2.5 h-2 w-3/4 bg-foreground/70" />
           <span className="mt-1.5 h-1.5 w-1/2 bg-foreground/15" />
@@ -307,7 +267,7 @@ function EcommerceVisual() {
 function AutomationVisual() {
   return (
     <Stage>
-      <div className="absolute inset-0 grid grid-cols-[auto_1fr_auto] grid-rows-1 items-center px-5 py-6">
+      <div className="absolute inset-0 grid grid-cols-[auto_1fr_auto] grid-rows-1 items-center px-4 py-6 sm:px-5">
         <FlowNode dot="right">Nuevo pedido</FlowNode>
         <FanLines mode="out" />
         <NodeColumn items={["CRM", "Email", "Informe"]} dot="left" activeIndex={1} />
@@ -327,7 +287,7 @@ const agentSteps: { label: string; state: StepState }[] = [
 function AgentVisual() {
   return (
     <Stage>
-      <div className="absolute inset-0 flex gap-6 p-5 sm:px-8">
+      <div className="absolute inset-0 flex gap-4 p-4 sm:gap-6 sm:p-5 sm:px-8">
         {/* Conversación */}
         <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5">
           <MonoTag tone="neutral" className="self-start">
@@ -347,7 +307,7 @@ function AgentVisual() {
           </div>
         </div>
 
-        {/* Traza del agente */}
+        {/* Traza del agente (solo desde sm: en móvil no cabe) */}
         <div
           className="hidden w-[46%] shrink-0 flex-col justify-center gap-1.5 sm:flex"
           style={fadeBottom(65)}
@@ -366,10 +326,10 @@ function AgentVisual() {
 function IntegrationsVisual() {
   return (
     <Stage>
-      <div className="absolute inset-0 grid grid-cols-[auto_1fr_auto_1fr_auto] grid-rows-1 items-center px-5 py-6 sm:px-8">
+      <div className="absolute inset-0 grid grid-cols-[auto_1fr_auto_1fr_auto] grid-rows-1 items-center px-3 py-6 sm:px-8">
         <NodeColumn items={["Shopify", "Stripe", "WhatsApp"]} dot="right" />
         <FanLines mode="in" />
-        <FlowNode dot="both" active className="px-3 py-3">
+        <FlowNode dot="both" active className="py-3 sm:px-3">
           Stackss
         </FlowNode>
         <FanLines mode="out" />
@@ -382,12 +342,12 @@ function IntegrationsVisual() {
 function MaintenanceVisual() {
   return (
     <Stage>
-      <MonoTag className="absolute top-2.5 left-6">
+      <MonoTag className="absolute top-2.5 left-4 sm:left-6">
         <PulseDot />
         Todo en orden
       </MonoTag>
       <div
-        className="absolute inset-x-6 top-12 flex flex-col gap-1.5"
+        className="absolute inset-x-4 top-12 flex flex-col gap-1.5 sm:inset-x-6"
         style={fadeBottom(75)}
       >
         <StepRow state="done">Dependencias al día</StepRow>
@@ -414,7 +374,8 @@ const visuals: Record<string, ComponentType> = {
 /* -------------------------------------------------------------------------- */
 
 export function Capabilities() {
-  const lastIndex = capabilities.items.length - 1
+  const total = capabilities.items.length
+  const lastIndex = total - 1
 
   // En móvil cada servicio es una tarjeta (borde sólido + fondo card) dentro
   // de un carrusel. Desde sm se convierte en la celda del bento con líneas
@@ -432,18 +393,28 @@ export function Capabilities() {
         index === lastIndex && "sm:max-lg:col-span-2"
       ),
       content: (
-        <article className="flex h-full w-full flex-col gap-5 p-5 sm:gap-8 sm:p-8">
+        <article className="flex h-full w-full flex-col gap-4 p-4 sm:gap-8 sm:p-8">
           <div>
-            <span
-              className="flex size-9 items-center justify-center border border-brand/60"
-              style={{ background: tint(14), color: INK }}
-            >
-              <Icon className="size-4.5" aria-hidden="true" />
-            </span>
-            <h3 className="mt-4 text-lg font-semibold tracking-tight sm:mt-5">
+            <div className="flex items-start justify-between">
+              <span
+                className="flex size-9 items-center justify-center border border-brand/60"
+                style={{ background: tint(14), color: INK }}
+              >
+                <Icon className="size-4.5" aria-hidden="true" />
+              </span>
+              {/* Contador: solo móvil, igual que en Problem */}
+              <span className="font-mono text-[0.625rem] tracking-wider text-muted-foreground uppercase sm:hidden">
+                {String(index + 1).padStart(2, "0")}
+                <span className="text-foreground/25">
+                  {" "}
+                  / {String(total).padStart(2, "0")}
+                </span>
+              </span>
+            </div>
+            <h3 className="mt-3 text-base font-semibold tracking-tight sm:mt-5 sm:text-lg">
               {item.title}
             </h3>
-            <p className="mt-2 max-w-md text-sm text-muted-foreground">
+            <p className="mt-1.5 max-w-md text-sm leading-relaxed text-muted-foreground sm:mt-2 sm:leading-normal">
               {item.description}
             </p>
           </div>
@@ -454,22 +425,22 @@ export function Capabilities() {
   })
 
   return (
-    <section id="capacidades" className="py-10 sm:py-16">
+    <section id="capacidades" className="py-8 sm:py-16">
       <div className={cn("border-y", DASH)}>
         {/* Cabecera */}
         <div className={cn("border-b", DASH)}>
           <div
             className={cn(
-              "mx-auto max-w-6xl px-4 py-7 sm:border-x sm:px-10 sm:py-12",
+              "mx-auto max-w-6xl px-4 py-6 sm:border-x sm:px-10 sm:py-12",
               DASH
             )}
           >
             <Reveal>
               <MonoTag>{capabilities.eyebrow}</MonoTag>
-              <h2 className="mt-3 max-w-2xl text-3xl leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl">
+              <h2 className="mt-3 max-w-2xl text-[1.75rem] leading-[1.08] font-semibold tracking-[-0.035em] text-pretty sm:mt-5 sm:text-5xl sm:leading-[1.05]">
                 {capabilities.title}
               </h2>
-              <p className="mt-3 max-w-xl text-base leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
+              <p className="mt-3 max-w-xl text-[0.9375rem] leading-snug text-foreground/85 sm:mt-4 sm:text-lg">
                 {capabilities.subtitle}
               </p>
             </Reveal>
@@ -480,7 +451,7 @@ export function Capabilities() {
             por líneas discontinuas. */}
         <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
           {/* sm:-mr-px / sm:-mb-px + overflow-hidden recortan el último borde de cada celda */}
-          <div className="py-5 sm:overflow-hidden sm:py-0">
+          <div className="max-sm:pt-5 max-sm:pb-3 sm:overflow-hidden">
             <SnapCarousel
               label="Servicios"
               listClassName="sm:-mr-px sm:-mb-px sm:grid sm:grid-cols-2 lg:grid-cols-3"

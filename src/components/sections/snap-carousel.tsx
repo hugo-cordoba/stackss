@@ -1,6 +1,12 @@
 "use client"
 
-import { useCallback, useRef, useState, type ReactNode } from "react"
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react"
 import { cn } from "cn"
 import { Reveal } from "@/components/motion/reveal"
 
@@ -35,23 +41,57 @@ export function SnapCarousel({
   dotsClassName?: string
 }) {
   const listRef = useRef<HTMLUListElement>(null)
+  const frame = useRef(0)
   const [active, setActive] = useState(0)
 
-  const handleScroll = useCallback(() => {
+  // Tarjeta activa = la más cercana al borde de alineación (inicio + padding).
+  // Si se llegó al final del scroll, siempre es la última (la última tarjeta
+  // no puede alcanzar el inicio y con el cálculo proporcional anterior
+  // el punto activo "saltaba").
+  const updateActive = useCallback(() => {
+    frame.current = 0
     const list = listRef.current
     if (!list) return
     const max = list.scrollWidth - list.clientWidth
     if (max <= 0) return
-    setActive(Math.round((list.scrollLeft / max) * (items.length - 1)))
+    if (list.scrollLeft >= max - 2) {
+      setActive(items.length - 1)
+      return
+    }
+    const pad = parseFloat(getComputedStyle(list).paddingLeft) || 0
+    const target = list.scrollLeft + pad
+    let best = 0
+    let bestDistance = Infinity
+    for (let i = 0; i < list.children.length; i++) {
+      const distance = Math.abs((list.children[i] as HTMLElement).offsetLeft - target)
+      if (distance < bestDistance) {
+        best = i
+        bestDistance = distance
+      }
+    }
+    setActive(best)
   }, [items.length])
+
+  // Throttle a un cálculo por frame.
+  const handleScroll = useCallback(() => {
+    if (frame.current) return
+    frame.current = requestAnimationFrame(updateActive)
+  }, [updateActive])
+
+  useEffect(() => {
+    return () => {
+      if (frame.current) cancelAnimationFrame(frame.current)
+    }
+  }, [])
 
   const goTo = useCallback((index: number) => {
     const list = listRef.current
     const item = list?.children[index] as HTMLElement | undefined
     if (!list || !item) return
+    const pad = parseFloat(getComputedStyle(list).paddingLeft) || 0
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     list.scrollTo({
-      left: item.offsetLeft - (list.clientWidth - item.offsetWidth) / 2,
+      left: item.offsetLeft - pad,
       behavior: reduce ? "auto" : "smooth",
     })
   }, [])
@@ -63,7 +103,9 @@ export function SnapCarousel({
           ref={listRef}
           onScroll={handleScroll}
           className={cn(
-            "relative max-sm:flex max-sm:snap-x max-sm:snap-mandatory max-sm:gap-3 max-sm:overflow-x-auto max-sm:overscroll-x-contain max-sm:px-4 max-sm:pb-1 max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden",
+            // Las tarjetas se alinean al inicio (respetando el margen de 16px)
+            // y asoma la siguiente, lo que invita a deslizar.
+            "relative max-sm:flex max-sm:snap-x max-sm:snap-mandatory max-sm:scroll-px-4 max-sm:gap-3 max-sm:overflow-x-auto max-sm:overscroll-x-contain max-sm:px-4 max-sm:pb-1 max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden",
             listClassName
           )}
         >
@@ -71,7 +113,8 @@ export function SnapCarousel({
             <li
               key={item.key}
               className={cn(
-                "flex max-sm:shrink-0 max-sm:snap-center",
+                // snap-always: un swipe rápido no se salta tarjetas.
+                "flex max-sm:shrink-0 max-sm:snap-start max-sm:snap-always",
                 itemClassName,
                 item.className
               )}
@@ -81,10 +124,10 @@ export function SnapCarousel({
           ))}
         </ul>
 
-        {/* Indicadores (solo móvil) */}
+        {/* Indicadores (solo móvil). Área táctil de 32px de alto. */}
         <div
           className={cn(
-            "mt-3 flex items-center justify-center sm:hidden",
+            "mt-2 flex items-center justify-center sm:hidden",
             dotsClassName
           )}
         >
@@ -95,12 +138,12 @@ export function SnapCarousel({
               aria-label={`Ir a la tarjeta ${index + 1} de ${items.length}`}
               aria-current={index === active ? "true" : undefined}
               onClick={() => goTo(index)}
-              className="flex h-6 items-center px-1 outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+              className="flex h-8 items-center px-1.5 outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
             >
               <span
                 className={cn(
                   "block h-1.5 transition-all duration-300",
-                  index === active ? "w-6 bg-brand" : "w-1.5 bg-foreground/20"
+                  index === active ? "w-6 bg-brand" : "w-1.5 bg-foreground/25"
                 )}
               />
             </button>
