@@ -3,8 +3,7 @@ export const siteConfig = {
   title: "Stackss — Webs que venden y automatizaciones que ahorran tiempo",
   description:
     "Diseñamos y desarrollamos webs que convierten y automatizamos tareas con Python e IA para startups, pymes y agencias.",
-  // TODO: sustituir por el dominio real antes de desplegar a producción
-  url: "https://stackss.example.com",
+  url: "https://stackss.xyz",
   locale: "es_ES",
 }
 
