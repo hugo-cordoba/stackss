@@ -97,7 +97,7 @@ function TechList({ hidden }: { hidden?: boolean }) {
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
+      <div className={cn("mx-auto max-w-site sm:border-x", DASH)}>
         <div className="grid lg:grid-cols-[1fr_1fr]">
           {/* Columna de texto: centrada en móvil/tablet, a la izquierda en escritorio */}
           <div
@@ -111,7 +111,7 @@ export function Hero() {
 
             <DashedRow className="px-4 pt-6 pb-4 sm:px-10 sm:pt-10 sm:pb-6 lg:py-6">
               <Reveal>
-                <h1 className="text-[2.25rem] leading-[0.97] font-semibold tracking-[-0.045em] text-pretty max-sm:text-balance min-[430px]:text-[2.5rem] sm:text-6xl lg:text-[4.5rem]">
+                <h1 className="text-[2.25rem] leading-[0.97] font-semibold tracking-[-0.045em] text-pretty max-sm:text-balance min-[430px]:text-[2.5rem] sm:text-6xl lg:text-[3.5rem] xl:text-[4.5rem] 2xl:text-[5rem]">
                   {hero.title}
                 </h1>
               </Reveal>
@@ -155,7 +155,7 @@ export function Hero() {
 
       {/* Tecnologías (a sangre) */}
       <div className={cn("border-y", DASH)}>
-        <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
+        <div className={cn("mx-auto max-w-site sm:border-x", DASH)}>
           <p
             className={cn(
               "border-b px-6 py-2.5 text-center font-mono text-[0.625rem] tracking-widest text-muted-foreground uppercase sm:py-3 sm:text-[0.7rem]",

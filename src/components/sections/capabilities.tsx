@@ -431,7 +431,7 @@ export function Capabilities() {
         <div className={cn("border-b", DASH)}>
           <div
             className={cn(
-              "mx-auto max-w-6xl px-4 py-6 sm:border-x sm:px-10 sm:py-12",
+              "mx-auto max-w-site px-4 py-6 sm:border-x sm:px-10 sm:py-12",
               DASH
             )}
           >
@@ -449,7 +449,7 @@ export function Capabilities() {
 
         {/* Móvil: carrusel de tarjetas. Escritorio: bento con celdas separadas
             por líneas discontinuas. */}
-        <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
+        <div className={cn("mx-auto max-w-site sm:border-x", DASH)}>
           {/* sm:-mr-px / sm:-mb-px + overflow-hidden recortan el último borde de cada celda */}
           <div className="max-sm:pt-5 max-sm:pb-3 sm:overflow-hidden">
             <SnapCarousel

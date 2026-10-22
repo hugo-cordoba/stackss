@@ -24,10 +24,11 @@ const NavbarMobileMenu = dynamic(
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
-// Ancho máximo de la píldora. Al hacer scroll se estrecha hasta 1150px
-// (los 1152px de max-w-6xl menos 2px).
-const WIDTH_TOP = 1280
-const WIDTH_SCROLLED = 1150
+// Ancho máximo de la píldora, derivado del contenedor (--site-w, en globals.css).
+// Arriba sobresale 4rem por lado; al hacer scroll se ajusta al contenedor
+// (menos 2px de los bordes). Strings completos para que Tailwind los detecte.
+const PILL_TOP = "max-w-[calc(var(--site-w)_+_8rem)]"
+const PILL_SCROLLED = "max-w-[calc(var(--site-w)_-_2px)]"
 
 export function Navbar() {
   const { scrollY } = useScroll()
@@ -56,14 +57,13 @@ export function Navbar() {
   return (
     <header className="sticky top-2 z-40 mt-2 h-12 px-4 sm:top-4 sm:mt-4 sm:h-14 sm:px-6 lg:px-8">
       <motion.div
-        initial={{ y: -80, opacity: 0, maxWidth: WIDTH_TOP }}
-        animate={{
-          y: 0,
-          opacity: 1,
-          maxWidth: scrolled ? WIDTH_SCROLLED : WIDTH_TOP,
-        }}
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: EASE }}
-        className="relative mx-auto w-full"
+        className={cn(
+          "relative mx-auto w-full transition-[max-width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+          scrolled ? PILL_SCROLLED : PILL_TOP
+        )}
       >
         <div
           data-scrolled={scrolled}

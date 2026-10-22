@@ -14,7 +14,7 @@ import { solution } from "@/content/site"
 
 export function Solution() {
   return (
-    <section id="solucion" className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+    <section id="solucion" className="mx-auto max-w-site px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
       <Reveal>
         <div className="mx-auto flex max-w-2xl flex-col items-start text-left sm:items-center sm:text-center">
           <MonoTag>{solution.eyebrow}</MonoTag>

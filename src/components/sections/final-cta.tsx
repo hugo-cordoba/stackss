@@ -42,7 +42,7 @@ export function FinalCta() {
   return (
     <section id="contacto" className="py-8 sm:py-16">
       <div className={cn("border-y", DASH)}>
-        <div className={cn("mx-auto max-w-6xl sm:border-x", DASH)}>
+        <div className={cn("mx-auto max-w-site sm:border-x", DASH)}>
           <div className="grid lg:grid-cols-2">
             {/* Texto: primero también en móvil, para que el CTA se vea al aterrizar */}
             <div

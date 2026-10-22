@@ -13,7 +13,7 @@ import { process } from "@/content/site"
 
 // Cada paso baja un escalón más en escritorio. Clases estáticas para que
 // Tailwind las detecte.
-const OFFSETS = ["lg:mt-0", "lg:mt-8", "lg:mt-16", "lg:mt-24"]
+const OFFSETS = ["xl:mt-0", "xl:mt-8", "xl:mt-16", "xl:mt-24"]
 
 export function Process() {
   const lastIndex = process.steps.length - 1
@@ -21,7 +21,7 @@ export function Process() {
   return (
     <section
       id="proceso"
-      className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8"
+      className="mx-auto max-w-site px-4 py-10 sm:px-6 sm:py-16 lg:px-8"
     >
       <Reveal>
         <div className="max-w-2xl">
@@ -36,7 +36,7 @@ export function Process() {
       </Reveal>
 
       {/* Móvil: lista vertical (1 columna). Tablet: 2x2. Escritorio: 4 columnas escalonadas. */}
-      <ol className="mt-6 grid grid-cols-1 gap-2.5 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 lg:items-start">
+      <ol className="mt-6 grid grid-cols-1 gap-2.5 sm:mt-14 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4 xl:items-start">
         {process.steps.map((step, index) => {
           const Icon = getIcon(step.icon)
           const isLast = index === lastIndex
@@ -107,7 +107,7 @@ export function Process() {
               {!isLast && (
                 <span
                   aria-hidden="true"
-                  className="absolute top-14 right-0 z-20 hidden size-7 translate-x-[calc(50%+0.5rem)] items-center justify-center border border-brand/60 lg:flex"
+                  className="absolute top-14 right-0 z-20 hidden size-7 translate-x-[calc(50%+0.5rem)] items-center justify-center border border-brand/60 xl:flex"
                   style={{ background: tint(22), color: INK }}
                 >
                   <ArrowDownRight className="size-4" />
