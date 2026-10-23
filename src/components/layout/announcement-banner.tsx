@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { ArrowRight, X } from "lucide-react"
+import { ScrollLink } from "@/components/scroll-link"
 import { announcementBanner } from "@/content/site"
 
 export function AnnouncementBanner() {
@@ -12,7 +12,7 @@ export function AnnouncementBanner() {
 
   return (
     <div className="relative flex items-center bg-primary py-2.5 pr-11 pl-4 text-[0.8125rem] leading-tight font-medium text-primary-foreground sm:justify-center sm:px-12 sm:text-center sm:text-sm">
-      <Link
+      <ScrollLink
         href={announcementBanner.href}
         className="-my-2.5 inline-flex flex-wrap items-center gap-x-1.5 py-2.5 hover:underline active:underline sm:flex-nowrap sm:justify-center"
       >
@@ -21,7 +21,7 @@ export function AnnouncementBanner() {
           {announcementBanner.linkLabel}
           <ArrowRight className="size-3.5" aria-hidden="true" />
         </span>
-      </Link>
+      </ScrollLink>
       <button
         type="button"
         onClick={() => setVisible(false)}

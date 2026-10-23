@@ -1,9 +1,9 @@
 import type { ReactNode } from "react"
-import Link from "next/link"
 import { Check, ChevronRight } from "lucide-react"
 import { cn } from "cn"
 import { Reveal } from "@/components/motion/reveal"
 import { MonoTag, PulseDot, dotGrid } from "@/components/sections/mono"
+import { ScrollLink } from "@/components/scroll-link"
 import { finalCta } from "@/content/site"
 
 const DASH = "border-dashed border-foreground/15"
@@ -20,7 +20,7 @@ function CtaButton({
   children: ReactNode
 }) {
   return (
-    <Link
+    <ScrollLink
       href={href}
       className={cn(
         "group inline-flex h-12 w-full items-center justify-between gap-3 px-5 font-mono text-sm tracking-wide whitespace-nowrap uppercase transition-[colors,transform] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-px sm:w-auto sm:justify-center",
@@ -34,20 +34,20 @@ function CtaButton({
         className="size-4 transition-transform group-hover:translate-x-0.5"
         aria-hidden="true"
       />
-    </Link>
+    </ScrollLink>
   )
 }
 
 export function FinalCta() {
   return (
-    <section id="contacto" className="py-8 sm:py-16">
+    <section id="contacto" className="py-8 sm:py-16 laptop:py-10">
       <div className={cn("border-y", DASH)}>
         <div className={cn("mx-auto max-w-site sm:border-x", DASH)}>
           <div className="grid lg:grid-cols-2">
             {/* Texto: primero también en móvil, para que el CTA se vea al aterrizar */}
             <div
               className={cn(
-                "flex flex-col justify-center px-4 py-8 sm:px-10 sm:py-16 lg:border-r",
+                "flex flex-col justify-center px-4 py-8 sm:px-10 sm:py-16 lg:border-r lg:px-8 xl:px-10",
                 DASH
               )}
             >
@@ -63,7 +63,7 @@ export function FinalCta() {
                   {finalCta.subtitle}
                 </p>
 
-                <div className="mt-6 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:gap-3">
+                <div className="mt-6 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-3">
                   <CtaButton href={finalCta.primaryCta.href} variant="primary">
                     {finalCta.primaryCta.label}
                   </CtaButton>

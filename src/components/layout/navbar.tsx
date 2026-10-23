@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import {
   AnimatePresence,
   motion,
@@ -14,6 +15,7 @@ import { cn } from "cn"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { NavbarDesktopNav } from "@/components/layout/navbar-desktop-nav"
+import { ScrollLink, scrollToTop } from "@/components/scroll-link"
 import { nav } from "@/content/site"
 
 // Solo se descarga cuando se abre el menú móvil por primera vez.
@@ -31,6 +33,7 @@ const PILL_TOP = "max-w-[calc(var(--site-w)_+_8rem)]"
 const PILL_SCROLLED = "max-w-[calc(var(--site-w)_-_2px)]"
 
 export function Navbar() {
+  const pathname = usePathname()
   const { scrollY } = useScroll()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -71,6 +74,11 @@ export function Navbar() {
         >
           <Link
             href="/"
+            onClick={(event) => {
+              if (pathname !== "/") return
+              event.preventDefault()
+              scrollToTop()
+            }}
             className="flex items-center gap-2 rounded-lg text-lg font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <span
@@ -87,7 +95,7 @@ export function Navbar() {
             <span className="[&>button]:rounded-lg">
               <ThemeToggle />
             </span>
-            <Link
+            <ScrollLink
               href={nav.cta.href}
               className={cn(
                 buttonVariants({ size: "lg" }),
@@ -99,7 +107,7 @@ export function Navbar() {
                 className="size-4 transition-transform duration-300 group-hover/button:translate-x-0.5"
                 aria-hidden="true"
               />
-            </Link>
+            </ScrollLink>
           </div>
 
           {/* Controles móviles */}

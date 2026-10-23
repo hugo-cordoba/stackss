@@ -1,16 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { motion } from "motion/react"
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
+import { ScrollLink } from "@/components/scroll-link"
 import { nav } from "@/content/site"
 
 // Aísla el estado de hover: pasar el ratón por los enlaces solo re-renderiza
@@ -25,7 +17,7 @@ export function NavbarDesktopNav() {
       onMouseLeave={() => setHovered(null)}
     >
       {nav.links.map((link) => (
-        <Link
+        <ScrollLink
           key={link.href}
           href={link.href}
           onMouseEnter={() => setHovered(link.href)}
@@ -41,37 +33,8 @@ export function NavbarDesktopNav() {
             />
           )}
           <span className="relative z-10">{link.label}</span>
-        </Link>
+        </ScrollLink>
       ))}
-
-      <NavigationMenu onMouseEnter={() => setHovered(null)}>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="rounded-lg bg-transparent px-3.5 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">
-              {nav.company.label}
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-64 gap-1">
-                {nav.company.items.map((item) => (
-                  <li key={item.href}>
-                    <NavigationMenuLink
-                      render={<Link href={item.href} />}
-                      className="flex-col items-start gap-0.5"
-                    >
-                      <span className="font-medium text-foreground">
-                        {item.label}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {item.description}
-                      </span>
-                    </NavigationMenuLink>
-                  </li>
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
     </nav>
   )
 }

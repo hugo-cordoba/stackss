@@ -393,7 +393,7 @@ export function Capabilities() {
         index === lastIndex && "sm:max-lg:col-span-2"
       ),
       content: (
-        <article className="flex h-full w-full flex-col gap-4 p-4 sm:gap-8 sm:p-8">
+        <article className="flex h-full w-full flex-col gap-4 p-4 sm:gap-6 sm:p-6 xl:gap-8 xl:p-8">
           <div>
             <div className="flex items-start justify-between">
               <span
@@ -425,7 +425,7 @@ export function Capabilities() {
   })
 
   return (
-    <section id="capacidades" className="py-8 sm:py-16">
+    <section id="capacidades" className="py-8 sm:py-16 laptop:py-10">
       <div className={cn("border-y", DASH)}>
         {/* Cabecera */}
         <div className={cn("border-b", DASH)}>

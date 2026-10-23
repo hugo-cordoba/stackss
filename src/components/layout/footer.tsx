@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { cn } from "cn"
 import { Separator } from "@/components/ui/separator"
+import { ScrollLink } from "@/components/scroll-link"
 import { footer, nav } from "@/content/site"
 
 // py-2 en móvil = área táctil de ~36px; en escritorio vuelve al aspecto compacto.
@@ -45,9 +46,9 @@ export function Footer() {
                 >
                   {column.links.map((link) => (
                     <li key={link.label}>
-                      <Link href={link.href} className={LINK}>
+                      <ScrollLink href={link.href} className={LINK}>
                         {link.label}
-                      </Link>
+                      </ScrollLink>
                     </li>
                   ))}
                 </ul>

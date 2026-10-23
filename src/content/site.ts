@@ -17,29 +17,10 @@ export const nav = {
   logo: "Stackss",
   links: [
     { label: "Servicios", href: "/#capacidades" },
-    { label: "Proyectos", href: "/#proyectos" },
     { label: "Proceso", href: "/#proceso" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Sobre nosotros", href: "/sobre-nosotros" },
   ],
-  company: {
-    label: "Empresa",
-    items: [
-      {
-        label: "Sobre nosotros",
-        href: "/#sobre-nosotros",
-        description: "Quiénes somos y cómo trabajamos.",
-      },
-      {
-        label: "FAQ",
-        href: "/faq",
-        description: "Respuestas a las dudas más habituales.",
-      },
-      {
-        label: "Contacto",
-        href: "/#contacto",
-        description: "Cuéntanos tu proyecto.",
-      },
-    ],
-  },
   cta: { label: "Hablemos", href: "/#contacto" },
 }
 
@@ -278,6 +259,44 @@ export const faq = {
   ],
 }
 
+export const aboutUs = {
+  eyebrow: "Sobre nosotros",
+  title: "Un equipo pequeño que construye como si fuera su propio negocio",
+  subtitle:
+    "Trabajamos codo a codo contigo, sin intermediarios de por medio: las mismas personas que diseñan tu web o tu automatización son las que te responden cuando escribes.",
+  principles: [
+    {
+      icon: "KeyRound",
+      title: "El código es tuyo",
+      description:
+        "Te entregamos el repositorio completo y la documentación necesaria para que cualquier equipo pueda continuar el proyecto, con o sin nosotros.",
+    },
+    {
+      icon: "LayoutTemplate",
+      title: "Nada de plantillas genéricas",
+      description:
+        "Cada web y cada automatización se diseña para tu negocio concreto, no se adapta un molde que ya usan otros cien clientes.",
+    },
+    {
+      icon: "Gauge",
+      title: "Rendimiento desde el primer commit",
+      description:
+        "Medimos velocidad de carga, SEO técnico y resultados reales desde el primer día, no como un ajuste de última hora.",
+    },
+    {
+      icon: "Briefcase",
+      title: "Comunicación directa",
+      description:
+        "Hablas con quien construye tu proyecto, no con un gestor de cuentas que traduce tus mensajes a otro equipo.",
+    },
+  ],
+  cta: {
+    title: "¿Quieres saber cómo trabajamos paso a paso?",
+    primaryCta: { label: "Ver nuestro proceso", href: "/#proceso" },
+    secondaryCta: { label: "Hablemos de tu proyecto", href: "/#contacto" },
+  },
+}
+
 export const finalCta = {
   eyebrow: "Contacto",
   title: "¿Hablamos de tu proyecto?",
@@ -304,7 +323,7 @@ export const footer = {
       title: "Principal",
       links: [
         { label: "Servicios", href: "/#capacidades" },
-        { label: "Proyectos", href: "/#proyectos" },
+        { label: "Solución", href: "/#solucion" },
         { label: "Proceso", href: "/#proceso" },
         { label: "Contacto", href: "/#contacto" },
       ],
@@ -312,8 +331,8 @@ export const footer = {
     {
       title: "Útil",
       links: [
-        { label: "Sobre nosotros", href: "/#sobre-nosotros" },
         { label: "FAQ", href: "/faq" },
+        { label: "Sobre nosotros", href: "/sobre-nosotros" },
       ],
     },
     {

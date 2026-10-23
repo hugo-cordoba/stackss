@@ -4,6 +4,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Ancho de escritorio pero poca altura útil (≈1366×768, 1280×720, 1536×864) */
+@custom-variant laptop {
+  @media (min-width: 64rem) and (max-height: 50rem) {
+    @slot;
+  }
+}
+
 @theme inline {
   --container-site: var(--site-w);
   --color-background: var(--background);
@@ -149,7 +156,6 @@
   }
   html {
     @apply font-sans;
-    scroll-behavior: smooth;
     scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -233,12 +239,6 @@
 
   .dark .liquid-glass[data-scrolled="true"] {
     --glass-drop: 0 12px 32px -10px rgb(0 0 0 / 0.65);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
   }
 }
 

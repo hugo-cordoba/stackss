@@ -1,10 +1,10 @@
 "use client"
 
 import { motion } from "motion/react"
-import Link from "next/link"
 import type { ReactNode } from "react"
 import { ArrowRight } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
+import { ScrollLink } from "@/components/scroll-link"
 import { cn } from "cn"
 import { nav } from "@/content/site"
 
@@ -27,39 +27,24 @@ export function NavbarMobileMenu({ onClose }: { onClose: () => void }) {
           </MobileLink>
         ))}
 
-        <p className="mt-1 border-t border-border/60 px-4 pt-3 pb-1 text-xs font-medium text-muted-foreground">
-          {nav.company.label}
-        </p>
-
-        {nav.company.items.map((item, index) => (
-          <MobileLink
-            key={item.href}
-            href={item.href}
-            index={nav.links.length + index}
-            onClick={onClose}
-          >
-            {item.label}
-          </MobileLink>
-        ))}
-
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            delay: 0.05 + (nav.links.length + nav.company.items.length) * 0.04,
+            delay: 0.05 + nav.links.length * 0.04,
             duration: 0.3,
             ease: EASE,
           }}
           className="mt-2"
         >
-          <Link
+          <ScrollLink
             href={nav.cta.href}
             onClick={onClose}
             className={cn(buttonVariants({ size: "lg" }), "h-11 w-full rounded-lg text-base")}
           >
             {nav.cta.label}
             <ArrowRight className="size-4" aria-hidden="true" />
-          </Link>
+          </ScrollLink>
         </motion.div>
       </nav>
     </motion.div>
@@ -83,13 +68,13 @@ function MobileLink({
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.05 + index * 0.04, duration: 0.3, ease: EASE }}
     >
-      <Link
+      <ScrollLink
         href={href}
         onClick={onClick}
         className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted active:bg-muted"
       >
         {children}
-      </Link>
+      </ScrollLink>
     </motion.div>
   )
 }

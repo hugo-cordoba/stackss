@@ -1,8 +1,8 @@
 import type { CSSProperties, ReactNode } from "react"
-import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import { cn } from "cn"
 import { Reveal } from "@/components/motion/reveal"
+import { ScrollLink } from "@/components/scroll-link"
 import { hero, techMarquee } from "@/content/site"
 
 /* -------------------------------------------------------------------------- */
@@ -49,7 +49,7 @@ function HeroButton({
   children: ReactNode
 }) {
   return (
-    <Link
+    <ScrollLink
       href={href}
       className={cn(
         "group inline-flex items-center justify-center gap-3 px-5 font-mono text-sm tracking-wide whitespace-nowrap uppercase transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -63,7 +63,7 @@ function HeroButton({
         className="size-4 transition-transform group-hover:translate-x-0.5"
         aria-hidden="true"
       />
-    </Link>
+    </ScrollLink>
   )
 }
 
@@ -107,27 +107,27 @@ export function Hero() {
             )}
           >
             {/* Fila vacía: solo escritorio (absorbe el espacio sobrante y marca la rejilla) */}
-            <DashedRow className="hidden min-h-12 flex-1 lg:block lg:min-h-20" />
+            <DashedRow className="hidden min-h-12 flex-1 lg:block lg:min-h-20 laptop:min-h-10" />
 
-            <DashedRow className="px-4 pt-6 pb-4 sm:px-10 sm:pt-10 sm:pb-6 lg:py-6">
-              <Reveal>
-                <h1 className="text-[2.25rem] leading-[0.97] font-semibold tracking-[-0.045em] text-pretty max-sm:text-balance min-[430px]:text-[2.5rem] sm:text-6xl lg:text-[3.5rem] xl:text-[4.5rem] 2xl:text-[5rem]">
+            <DashedRow className="px-4 pt-6 pb-4 sm:px-10 sm:pt-10 sm:pb-6 lg:px-8 lg:py-6 xl:px-10">
+              <Reveal eager>
+                <h1 className="text-[2.25rem] leading-[0.97] font-semibold tracking-[-0.045em] text-pretty max-sm:text-balance min-[430px]:text-[2.5rem] sm:text-6xl lg:text-[length:clamp(2.75rem,min(5.6vw,8.5vh),5rem)]">
                   {hero.title}
                 </h1>
               </Reveal>
             </DashedRow>
 
-            <DashedRow className="px-4 py-3.5 sm:px-10 sm:py-6">
-              <Reveal delay={0.08}>
-                <p className="mx-auto max-w-xl text-[0.9375rem] leading-snug text-foreground/85 sm:text-xl lg:mx-0">
+            <DashedRow className="px-4 py-3.5 sm:px-10 sm:py-6 lg:px-8 xl:px-10">
+              <Reveal eager delay={0.08}>
+                <p className="mx-auto max-w-xl text-[0.9375rem] leading-snug text-foreground/85 sm:text-xl laptop:text-lg lg:mx-0">
                   {hero.subtitle}
                 </p>
               </Reveal>
             </DashedRow>
 
-            <DashedRow className="px-4 py-4 sm:px-10 sm:py-0">
-              <Reveal delay={0.16}>
-                <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3 sm:justify-center lg:justify-start">
+            <DashedRow className="px-4 py-4 sm:px-10 sm:py-0 lg:px-8 xl:px-10">
+              <Reveal eager delay={0.16}>
+                <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 sm:justify-center lg:justify-start">
                   <HeroButton href={hero.primaryCta.href} variant="primary">
                     {hero.primaryCta.label}
                   </HeroButton>
@@ -142,11 +142,11 @@ export function Hero() {
           {/* Ilustración */}
           <div
             className={cn(
-              "flex items-center justify-center border-t px-4 py-3 sm:p-6 lg:border-t-0 lg:p-8",
+              "flex items-center justify-center border-t px-4 py-3 sm:p-6 lg:border-t-0 lg:p-6 xl:p-8",
               DASH
             )}
           >
-            <Reveal delay={0.2} className="w-full max-w-[600px]">
+            <Reveal eager delay={0.2} className="w-full max-w-[600px]">
               <StackIllustration />
             </Reveal>
           </div>
@@ -186,7 +186,7 @@ export function Hero() {
                 <li
                   key={name}
                   className={cn(
-                    "flex h-[88px] items-center justify-center border-r border-b px-3 text-center text-lg font-semibold tracking-tight text-foreground/80",
+                    "flex h-16 items-center justify-center border-r border-b px-3 text-center text-lg font-semibold tracking-tight text-foreground/80 xl:h-[88px]",
                     DASH
                   )}
                 >

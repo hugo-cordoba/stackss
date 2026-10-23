@@ -56,7 +56,7 @@ export function Problem() {
   })
 
   return (
-    <section className="mx-auto max-w-site px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+    <section className="mx-auto max-w-site px-4 py-10 sm:px-6 sm:py-16 lg:px-8 laptop:py-12">
       <Reveal>
         <div className="grid items-end gap-3 sm:gap-6 lg:grid-cols-2 lg:gap-16">
           <div>

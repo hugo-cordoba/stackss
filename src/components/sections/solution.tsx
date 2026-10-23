@@ -14,7 +14,7 @@ import { solution } from "@/content/site"
 
 export function Solution() {
   return (
-    <section id="solucion" className="mx-auto max-w-site px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+    <section id="solucion" className="mx-auto max-w-site px-4 py-10 sm:px-6 sm:py-16 lg:px-8 laptop:py-12">
       <Reveal>
         <div className="mx-auto flex max-w-2xl flex-col items-start text-left sm:items-center sm:text-center">
           <MonoTag>{solution.eyebrow}</MonoTag>
@@ -27,7 +27,7 @@ export function Solution() {
         </div>
       </Reveal>
 
-      <div className="mt-7 flex flex-col gap-8 sm:mt-14 sm:gap-16 lg:gap-20">
+      <div className="mt-7 flex flex-col gap-8 sm:mt-14 sm:gap-16 lg:gap-20 laptop:gap-12">
         {solution.blocks.map((block, index) => {
           const Icon = getIcon(block.icon)
           const reversed = index % 2 === 1
