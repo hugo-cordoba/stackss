@@ -345,7 +345,7 @@ export const footer = {
     },
   ],
   social: [
-    { label: "LinkedIn", href: "#" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/stackss-xyz" },
     { label: "GitHub", href: "#" },
     { label: "X", href: "#" },
   ],
