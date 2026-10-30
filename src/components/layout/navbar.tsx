@@ -27,10 +27,11 @@ const NavbarMobileMenu = dynamic(
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
 // Ancho máximo de la píldora, derivado del contenedor (--site-w, en globals.css).
-// Arriba sobresale 4rem por lado; al hacer scroll se ajusta al contenedor
-// (menos 2px de los bordes). Strings completos para que Tailwind los detecte.
+// Arriba sobresale 4rem por lado; al hacer scroll se encoge un poco más que el
+// contenedor, dejando un pequeño padding a los lados. Strings completos para
+// que Tailwind los detecte.
 const PILL_TOP = "max-w-[calc(var(--site-w)_+_8rem)]"
-const PILL_SCROLLED = "max-w-[calc(var(--site-w)_-_2px)]"
+const PILL_SCROLLED = "max-w-[calc(var(--site-w)_-_1.5rem)]"
 
 export function Navbar() {
   const pathname = usePathname()
