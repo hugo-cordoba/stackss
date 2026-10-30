@@ -56,7 +56,16 @@ export function ScrollLink({ href, onClick, ...props }: ScrollLinkProps) {
   const hashIndex = href.indexOf("#")
 
   if (hashIndex === -1) {
-    return <Link href={href} onClick={onClick} {...props} />
+    // Enlace externo (ej. WhatsApp): se abre en una pestaña nueva.
+    const isExternal = /^https?:\/\//.test(href)
+    return (
+      <Link
+        href={href}
+        onClick={onClick}
+        {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        {...props}
+      />
+    )
   }
 
   const path = href.slice(0, hashIndex) || pathname

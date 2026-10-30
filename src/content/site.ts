@@ -7,6 +7,11 @@ export const siteConfig = {
   locale: "es_ES",
 }
 
+// Todos los botones de contacto ("Hablemos", "Escríbenos", etc.) abren el
+// chat de WhatsApp directamente en vez de hacer scroll a una sección.
+export const whatsappHref =
+  "https://wa.me/34624414187?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20proyecto"
+
 export const announcementBanner = {
   message: "Nuevo: agentes de IA.",
   linkLabel: "Ver más",
@@ -21,7 +26,7 @@ export const nav = {
     { label: "FAQ", href: "/faq" },
     { label: "Sobre nosotros", href: "/sobre-nosotros" },
   ],
-  cta: { label: "Hablemos", href: "/#contacto" },
+  cta: { label: "Hablemos", href: whatsappHref },
 }
 
 export const hero = {
@@ -29,7 +34,7 @@ export const hero = {
   title: "Haz crecer tu negocio. Automatiza lo repetitivo.",
   subtitle:
     "Ayudamos a startups, pymes y agencias a lanzar sitios que convierten y a quitarse de encima el trabajo repetitivo con automatizaciones en Python y agentes de IA.",
-  primaryCta: { label: "Hablemos de tu proyecto", href: "#contacto" },
+  primaryCta: { label: "Hablemos de tu proyecto", href: whatsappHref },
   secondaryCta: { label: "Ver qué hacemos", href: "#capacidades" },
   mockup: {
     browserTitle: "tuempresa.com",
@@ -293,7 +298,7 @@ export const aboutUs = {
   cta: {
     title: "¿Quieres saber cómo trabajamos paso a paso?",
     primaryCta: { label: "Ver nuestro proceso", href: "/#proceso" },
-    secondaryCta: { label: "Hablemos de tu proyecto", href: "/#contacto" },
+    secondaryCta: { label: "Hablemos de tu proyecto", href: whatsappHref },
   },
 }
 
@@ -302,9 +307,7 @@ export const finalCta = {
   title: "¿Hablamos de tu proyecto?",
   subtitle:
     "Cuéntanos qué necesitas y te decimos, sin rodeos, si podemos ayudarte y cómo.",
-  // TODO: sustituir "#contacto" por un mailto:, un formulario o un enlace a calendario.
-  primaryCta: { label: "Escríbenos", href: "#contacto" },
-  secondaryCta: { label: "Ver proceso de trabajo", href: "/#proceso" },
+  primaryCta: { label: "Escríbenos", href: whatsappHref },
   highlights: ["Presupuesto cerrado", "Código 100 % tuyo"],
   mockup: {
     tag: "Nuevo proyecto",
@@ -325,7 +328,7 @@ export const footer = {
         { label: "Servicios", href: "/#capacidades" },
         { label: "Solución", href: "/#solucion" },
         { label: "Proceso", href: "/#proceso" },
-        { label: "Contacto", href: "/#contacto" },
+        { label: "Contacto", href: whatsappHref },
       ],
     },
     {

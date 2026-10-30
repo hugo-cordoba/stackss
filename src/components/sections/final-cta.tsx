@@ -23,7 +23,7 @@ function CtaButton({
     <ScrollLink
       href={href}
       className={cn(
-        "group inline-flex h-12 w-full items-center justify-between gap-3 px-5 font-mono text-sm tracking-wide whitespace-nowrap uppercase transition-[color,background-color,border-color,transform] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-px sm:w-auto sm:justify-center",
+        "group inline-flex h-12 w-full items-center justify-between gap-3 px-5 font-mono text-sm tracking-wide whitespace-nowrap uppercase transition-[color,background-color,border-color,transform] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-px sm:w-80 sm:justify-center",
         variant === "primary"
           ? "bg-foreground text-background hover:bg-foreground/85"
           : "border border-foreground/15 bg-background text-foreground hover:bg-muted"
@@ -66,9 +66,6 @@ export function FinalCta() {
                 <div className="mt-6 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-3">
                   <CtaButton href={finalCta.primaryCta.href} variant="primary">
                     {finalCta.primaryCta.label}
-                  </CtaButton>
-                  <CtaButton href={finalCta.secondaryCta.href} variant="outline">
-                    {finalCta.secondaryCta.label}
                   </CtaButton>
                 </div>
 
