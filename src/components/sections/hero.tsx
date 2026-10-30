@@ -21,16 +21,20 @@ const fadeX: CSSProperties = { maskImage: FADE_X, WebkitMaskImage: FADE_X }
 function DashedRow({
   children,
   className,
+  last,
 }: {
   children?: ReactNode
   className?: string
+  last?: boolean
 }) {
   return (
     <div
       className={cn(
-        "relative border-b",
-        DASH,
-        "before:pointer-events-none before:absolute before:right-full before:-bottom-px before:h-px before:w-screen before:border-t before:border-dashed before:border-foreground/15",
+        "relative",
+        // La última fila no pinta línea propia: la línea que la cierra es el
+        // border-t del bloque de tecnologías (evita duplicarla).
+        !last &&
+          "border-b border-dashed border-foreground/15 before:pointer-events-none before:absolute before:right-full before:-bottom-px before:h-px before:w-screen before:border-t before:border-dashed before:border-foreground/15",
         className
       )}
     >
@@ -55,7 +59,7 @@ function HeroButton({
         "group inline-flex items-center justify-center gap-3 px-5 font-mono text-sm tracking-wide whitespace-nowrap uppercase transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         variant === "primary"
           ? "h-12 bg-foreground text-background hover:bg-foreground/85 active:bg-foreground/80"
-          : "h-11 border border-foreground/15 bg-background text-foreground hover:bg-muted active:bg-muted sm:h-12"
+          : "h-12 border-x border-dashed border-foreground/15 bg-background text-foreground hover:bg-muted active:bg-muted"
       )}
     >
       {children}
@@ -79,7 +83,7 @@ function TechList({ hidden }: { hidden?: boolean }) {
         <li
           key={name}
           className={cn(
-            "flex h-12 items-center border-r px-6 text-base font-semibold tracking-tight whitespace-nowrap text-foreground/80",
+            "flex h-12 items-center border-r px-6 text-base font-semibold tracking-tight whitespace-nowrap text-foreground/80 sm:h-16 sm:px-10 sm:text-lg xl:h-[88px]",
             DASH
           )}
         >
@@ -125,7 +129,7 @@ export function Hero() {
               </Reveal>
             </DashedRow>
 
-            <DashedRow className="px-4 py-4 sm:px-10 sm:py-0 lg:px-8 xl:px-10">
+            <DashedRow last className="px-4 py-4 sm:px-10 sm:py-0 lg:px-8 xl:px-10">
               <Reveal eager delay={0.16}>
                 <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 sm:justify-center lg:justify-start">
                   <HeroButton href={hero.primaryCta.href} variant="primary">
@@ -168,32 +172,15 @@ export function Hero() {
             </span>
           </p>
 
-          {/* Móvil: una sola fila que se desplaza */}
+          {/* Una sola fila que se desplaza, en todos los tamaños */}
           <div
-            className="overflow-hidden [scrollbar-width:none] motion-reduce:overflow-x-auto md:hidden"
+            className="overflow-hidden [scrollbar-width:none] motion-reduce:overflow-x-auto"
             style={fadeX}
           >
             <div className="flex w-max animate-marquee">
               <TechList />
               <TechList hidden />
             </div>
-          </div>
-
-          {/* Escritorio: rejilla. -mr-px / -mb-px + overflow-hidden recortan el último borde de cada celda */}
-          <div className="hidden overflow-hidden md:block">
-            <ul className="-mr-px -mb-px grid grid-cols-5">
-              {techMarquee.map((name) => (
-                <li
-                  key={name}
-                  className={cn(
-                    "flex h-16 items-center justify-center border-r border-b px-3 text-center text-lg font-semibold tracking-tight text-foreground/80 xl:h-[88px]",
-                    DASH
-                  )}
-                >
-                  {name}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
