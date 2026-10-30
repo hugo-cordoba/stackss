@@ -318,6 +318,152 @@ export const finalCta = {
   },
 }
 
+export const legalPages = {
+  privacidad: {
+    title: "Política de Privacidad",
+    updatedAt: "30 de octubre de 2026",
+    sections: [
+      {
+        heading: "Responsable del tratamiento",
+        body: [
+          "Stackss (stackss.xyz) es responsable del tratamiento de los datos personales que nos facilitas a través de este sitio web o de nuestros canales de contacto, como WhatsApp.",
+          "Para cualquier consulta sobre esta política o para ejercer tus derechos, puedes escribirnos directamente por WhatsApp desde los botones de contacto del sitio.",
+        ],
+      },
+      {
+        heading: "Qué datos recopilamos",
+        body: [
+          "Los datos que nos facilitas voluntariamente al contactarnos: nombre, número de teléfono, correo electrónico y el contenido de tu mensaje.",
+          "Datos de navegación básicos necesarios para el funcionamiento del sitio, como la preferencia de tema claro u oscuro, almacenada localmente en tu navegador.",
+        ],
+      },
+      {
+        heading: "Finalidad del tratamiento",
+        body: [
+          "Responder a tus consultas, elaborar presupuestos y gestionar la relación comercial antes, durante y después de un proyecto.",
+          "No utilizamos tus datos para fines distintos a los indicados ni los empleamos para publicidad sin tu consentimiento expreso.",
+        ],
+      },
+      {
+        heading: "Base legal",
+        body: [
+          "El consentimiento que nos das al escribirnos a través de nuestros canales de contacto, y la ejecución de un posible contrato de servicios si decides trabajar con nosotros.",
+        ],
+      },
+      {
+        heading: "Conservación de los datos",
+        body: [
+          "Conservamos tus datos mientras sean necesarios para atender tu consulta o mantener la relación contractual, y posteriormente durante los plazos exigidos por la legislación aplicable.",
+        ],
+      },
+      {
+        heading: "Destinatarios y cesión de datos",
+        body: [
+          "No cedemos tus datos a terceros, salvo obligación legal o cuando sea necesario para prestar el servicio solicitado (por ejemplo, el propio servicio de mensajería de WhatsApp al escribirnos por ese canal).",
+        ],
+      },
+      {
+        heading: "Tus derechos",
+        body: [
+          "Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad sobre tus datos personales en cualquier momento, escribiéndonos a través de nuestros canales de contacto.",
+        ],
+      },
+      {
+        heading: "Seguridad",
+        body: [
+          "Aplicamos medidas técnicas y organizativas razonables para proteger tus datos frente a accesos no autorizados, pérdida o alteración.",
+        ],
+      },
+      {
+        heading: "Cambios en esta política",
+        body: [
+          "Podemos actualizar esta política para adaptarla a cambios legislativos o en nuestros servicios. Publicaremos cualquier cambio relevante en esta misma página.",
+        ],
+      },
+    ],
+  },
+  terminos: {
+    title: "Términos y Condiciones",
+    updatedAt: "30 de octubre de 2026",
+    sections: [
+      {
+        heading: "Objeto",
+        body: [
+          "Estos términos regulan el acceso y uso del sitio web stackss.xyz, propiedad de Stackss, dedicado a mostrar nuestros servicios de desarrollo web y automatización.",
+        ],
+      },
+      {
+        heading: "Condiciones de uso",
+        body: [
+          "El acceso a este sitio es gratuito y no requiere registro. Te comprometes a utilizarlo de forma lícita, sin realizar prácticas fraudulentas ni que puedan dañar su funcionamiento.",
+        ],
+      },
+      {
+        heading: "Propiedad intelectual",
+        body: [
+          "Los textos, diseños y elementos visuales de este sitio web son propiedad de Stackss, salvo indicación contraria.",
+          "El código fuente y la propiedad intelectual de cada proyecto desarrollado para un cliente se rigen por lo acordado en el contrato específico de ese proyecto, no por estos términos generales del sitio.",
+        ],
+      },
+      {
+        heading: "Servicios y presupuestos",
+        body: [
+          "La información sobre servicios, plazos y precios mostrada en el sitio tiene carácter orientativo. El alcance, plazo y precio definitivos de cada proyecto se acuerdan de forma individual tras la fase de descubrimiento.",
+        ],
+      },
+      {
+        heading: "Enlaces a terceros",
+        body: [
+          "Este sitio incluye enlaces a servicios de terceros, como WhatsApp, para facilitar el contacto. No somos responsables del contenido, disponibilidad o políticas de esos servicios externos.",
+        ],
+      },
+      {
+        heading: "Limitación de responsabilidad",
+        body: [
+          "Stackss no garantiza la disponibilidad ininterrumpida del sitio y no se hace responsable de los daños derivados de un uso indebido del mismo.",
+        ],
+      },
+      {
+        heading: "Legislación aplicable",
+        body: [
+          "Estos términos se rigen por la legislación española. Cualquier controversia se someterá a los juzgados y tribunales competentes conforme a derecho.",
+        ],
+      },
+    ],
+  },
+  cookies: {
+    title: "Política de Cookies",
+    updatedAt: "30 de octubre de 2026",
+    sections: [
+      {
+        heading: "Qué son las cookies",
+        body: [
+          "Las cookies son pequeños archivos que algunos sitios web guardan en tu navegador para recordar información sobre tu visita.",
+        ],
+      },
+      {
+        heading: "Qué usamos en este sitio",
+        body: [
+          "Actualmente stackss.xyz no utiliza cookies de publicidad ni de seguimiento de terceros.",
+          "Usamos únicamente almacenamiento técnico necesario para el funcionamiento del sitio, como recordar tu preferencia de tema claro u oscuro en tu propio navegador.",
+        ],
+      },
+      {
+        heading: "Cómo gestionarlas",
+        body: [
+          "Puedes borrar o bloquear este tipo de almacenamiento en cualquier momento desde la configuración de tu navegador. Esto no afecta a la navegación básica del sitio.",
+        ],
+      },
+      {
+        heading: "Cambios en esta política",
+        body: [
+          "Si en el futuro incorporamos cookies analíticas o de terceros, actualizaremos esta página y solicitaremos tu consentimiento cuando sea necesario.",
+        ],
+      },
+    ],
+  },
+}
+
 export const footer = {
   description:
     "Desarrollo web y automatización con IA para negocios que quieren vender más y trabajar mejor.",
@@ -341,16 +487,12 @@ export const footer = {
     {
       title: "Legal",
       links: [
-        { label: "Privacidad", href: "#" },
-        { label: "Términos", href: "#" },
-        { label: "Cookies", href: "#" },
+        { label: "Privacidad", href: "/privacidad" },
+        { label: "Términos", href: "/terminos" },
+        { label: "Cookies", href: "/cookies" },
       ],
     },
   ],
-  social: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/stackss-xyz" },
-    { label: "GitHub", href: "#" },
-    { label: "X", href: "#" },
-  ],
+  social: [{ label: "LinkedIn", href: "https://www.linkedin.com/company/stackss-xyz" }],
   legalNote: `© ${new Date().getFullYear()} Stackss. Todos los derechos reservados.`,
 }
