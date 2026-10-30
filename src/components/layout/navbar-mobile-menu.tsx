@@ -5,6 +5,7 @@ import type { ReactNode } from "react"
 import { ArrowRight } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { ScrollLink } from "@/components/scroll-link"
+import { ThemeSwitch } from "@/components/theme-toggle"
 import { cn } from "cn"
 import { nav } from "@/content/site"
 
@@ -35,7 +36,20 @@ export function NavbarMobileMenu({ onClose }: { onClose: () => void }) {
             duration: 0.3,
             ease: EASE,
           }}
-          className="mt-2"
+          className="mt-2 flex items-center justify-between gap-2 rounded-lg px-4 py-2"
+        >
+          <span className="text-base font-medium text-foreground">Tema</span>
+          <ThemeSwitch />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.09 + nav.links.length * 0.04,
+            duration: 0.3,
+            ease: EASE,
+          }}
         >
           <ScrollLink
             href={nav.cta.href}

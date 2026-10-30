@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
@@ -18,5 +19,17 @@ export function ThemeToggle() {
       <Sun className="hidden size-4.5 dark:inline" aria-hidden="true" />
       <Moon className="inline size-4.5 dark:hidden" aria-hidden="true" />
     </Button>
+  )
+}
+
+export function ThemeSwitch() {
+  const { resolvedTheme, setTheme } = useTheme()
+
+  return (
+    <Switch
+      aria-label="Cambiar tema"
+      checked={resolvedTheme === "dark"}
+      onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+    />
   )
 }

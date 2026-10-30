@@ -112,10 +112,7 @@ export function Navbar() {
           </div>
 
           {/* Controles móviles */}
-          <div className="flex items-center gap-1 md:hidden">
-            <span className="[&>button]:rounded-lg">
-              <ThemeToggle />
-            </span>
+          <div className="flex items-center gap-1.5 md:hidden">
             <Button
               variant="secondary"
               size="icon"
