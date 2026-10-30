@@ -59,7 +59,7 @@ function HeroButton({
         "group inline-flex items-center justify-center gap-3 px-5 font-mono text-sm tracking-wide whitespace-nowrap uppercase transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         variant === "primary"
           ? "h-12 bg-foreground text-background hover:bg-foreground/85 active:bg-foreground/80"
-          : "h-12 border-x border-dashed border-foreground/15 bg-background text-foreground hover:bg-muted active:bg-muted"
+          : "h-12 border border-dashed border-foreground/15 bg-background text-foreground hover:bg-muted active:bg-muted sm:border-y-0 sm:border-x"
       )}
     >
       {children}
